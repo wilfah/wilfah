@@ -3,38 +3,1835 @@
 
 <head>
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>تفاصيل المنتج | ولفة</title>
+ <title>تفاصيل المنتج | ولفة</title>
 
-    <link rel="stylesheet" href="wilfah.css">
+ <link rel="stylesheet" href="wilfah.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
-          rel="stylesheet">
+ <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
+ rel="stylesheet">
 
-    <style>
+ <style>
 
-        /* =========================================
-           صور المنتج
-        ========================================= */
+ /* =========================================
+ صور المنتج
+ ========================================= */
 
-        .product-image-box {
-            width: 100%;
-            max-width: 500px;
-            margin: auto;
-            text-align: center;
-        }
+.product-image-box {
+ width: 100%;
+ max-width: 500px;
+ margin: auto;
+ text-align: center;
+ }
 
-        .product-main-image {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: 15px;
-            cursor: pointer;
-            display: block;
-        }
+.product-main-image {
+ width: 100%;
+ aspect-ratio: 1 / 1;
+ object-fit: cover;
+ border-radius: 15px;
+ cursor: pointer;
+ display: block;
+ }
 
+.product-thumbnails {
+ display: flex;
+ gap: 10px;
+ margin-top: 15px;
+ overflow-x: auto;
+ padding-bottom: 5px;
+ justify-content: center;
+ }
+
+.product-thumbnail {
+ width: 75px;
+ height: 75px;
+ object-fit: cover;
+ border-radius: 10px;
+ cursor: pointer;
+ border: 2px solid transparent;
+ transition: 0.2s;
+ flex-shrink: 0;
+ }
+
+.product-thumbnail:hover {
+ border-color: #333;
+ }
+
+.product-thumbnail.active {
+ border-color: #333;
+ }
+
+ /* =========================================
+ نافذة الصورة الكبيرة
+ ========================================= */
+
+.image-modal {
+ display: none;
+ position: fixed;
+ inset: 0;
+ background: rgba(0, 0, 0, 0.85);
+ z-index: 9999;
+ align-items: center;
+ justify-content: center;
+ padding: 20px;
+ }
+
+.image-modal.active {
+ display: flex;
+ }
+
+.image-modal img {
+ max-width: 90%;
+ max-height: 85vh;
+ object-fit: contain;
+ border-radius: 10px;
+ }
+
+.image-modal-close {
+ position: absolute;
+ top: 20px;
+ right: 30px;
+ color: white;
+ font-size: 40px;
+ cursor: pointer;
+ line-height: 1;
+ }
+
+ /* =========================================
+ الجوال
+ ========================================= */
+
+ @media (max-width: 700px) {
+
+.product-image-box {
+ width: 100%;
+ }
+
+.product-main-image {
+ aspect-ratio: 1 / 1;
+ }
+
+.product-thumbnails {
+ justify-content: flex-start;
+ }
+
+.product-thumbnail {
+ width: 65px;
+ height: 65px;
+ }
+
+ }
+
+ </style>
+
+</head>
+
+<body>
+
+<header>
+
+ <nav>
+
+ <div class="logo">
+
+ <img src="wilfah logo.jpg" alt="ولفة">
+
+ </div>
+
+ <ul>
+
+ <li>
+ <a href="wilfah.html">الرئيسية</a>
+ </li>
+
+ <li>
+ <a href="products.html">المنتجات</a>
+ </li>
+
+ <li>
+ <a href="cart.html">السلة</a>
+ </li>
+
+ </ul>
+
+ </nav>
+
+</header>
+
+<!-- =========================================
+ تفاصيل المنتج
+========================================= -->
+
+<section class="product-page">
+
+ <!-- =====================================
+ صور المنتج
+ ====================================== -->
+
+ <div class="product-image-box">
+
+ <img id="product-image"
+ src=""
+ alt=""
+ class="product-main-image">
+
+ <div id="product-thumbnails"
+ class="product-thumbnails">
+ </div>
+
+ </div>
+
+ <!-- =====================================
+ معلومات المنتج
+ ====================================== -->
+
+ <div class="product-info">
+
+ <h1 id="product-name"></h1>
+
+ <p id="product-description"></p>
+
+ <!-- السعر -->
+
+ <div class="product-price">
+
+ <span id="product-price">0</span>
+
+ ر.س
+
+ </div>
+
+ <!-- =====================================
+ اللون
+ ====================================== -->
+
+ <div id="product-color-option"
+ class="product-option">
+
+ <label for="product-color">
+ اللون:
+ </label>
+
+ <select id="product-color">
+
+ <option value="">
+ اللون
+ </option>
+
+ <option value="كحلي">
+ كحلي
+ </option>
+
+ <option value="أبيض">
+ أبيض
+ </option>
+
+ <option value="أحمر">
+ أحمر
+ </option>
+
+ <option value="بنفسجي">
+ بنفسجي
+ </option>
+
+ <option value="بني">
+ بني
+ </option>
+
+ </select>
+
+ </div>
+
+ <!-- =====================================
+ الشال الملون
+ ====================================== -->
+
+ <div id="colorful-shawl-options"
+ style="display:none;">
+
+ <h3>
+ ألوان الشال
+ </h3>
+
+ <p>
+ اختر ثلاثة ألوان مختلفة للشال.
+ </p>
+
+ <div class="product-option">
+
+ <label for="shawl-color-1">
+ اللون الأول:
+ </label>
+
+ <select id="shawl-color-1">
+
+ <option value="">
+ اللون
+ </option>
+
+ <option value="أبيض">أبيض</option>
+ <option value="أحمر">أحمر</option>
+ <option value="موف">موف</option>
+ <option value="بني">بني</option>
+
+ </select>
+
+ </div>
+
+ <div class="product-option">
+
+ <label for="shawl-color-2">
+ اللون الثاني:
+ </label>
+
+ <select id="shawl-color-2">
+
+ <option value="">
+ اللون
+ </option>
+
+ <option value="أبيض">أبيض</option>
+ <option value="أحمر">أحمر</option>
+ <option value="موف">موف</option>
+ <option value="بني">بني</option>
+
+ </select>
+
+ </div>
+
+ <div class="product-option">
+
+ <label for="shawl-color-3">
+ اللون الثالث:
+ </label>
+
+ <select id="shawl-color-3">
+
+ <option value="">
+ اللون
+ </option>
+
+ <option value="أبيض">أبيض</option>
+ <option value="أحمر">أحمر</option>
+ <option value="موف">موف</option>
+ <option value="بني">بني</option>
+
+ </select>
+
+ </div>
+
+ </div>
+
+ <!-- =====================================
+ المقاس
+ ====================================== -->
+
+ <div id="product-size-option"
+ class="product-option">
+
+ <label for="product-size">
+ المقاس:
+ </label>
+
+ <select id="product-size">
+
+ <option value="">
+ المقاس
+ </option>
+
+ </select>
+
+ </div>
+
+ <!-- =====================================
+ الإضافات
+ ====================================== -->
+
+ <div id="customization-options"
+ class="blanket-customization">
+
+ <h3>
+ الإضافات
+ </h3>
+
+ <!-- النجوم -->
+
+ <div class="custom-option">
+
+ <div class="option-title">
+
+ <span>
+ النجوم
+ </span>
+
+ <span>
+ 1 ر.س للحبة
+ </span>
+
+ </div>
+
+ <div class="quantity-control">
+
+ <button type="button"
+ onclick="changeOptionQuantity('stars', -1)">
+ −
+ </button>
+
+ <span id="stars-quantity">
+ 0
+ </span>
+
+ <button type="button"
+ onclick="changeOptionQuantity('stars', 1)">
+ +
+ </button>
+
+ </div>
+
+ <div id="stars-color-box"
+ style="display:none; margin-top:15px;">
+
+ <label for="stars-color">
+ لون تطريز النجوم:
+ </label>
+
+ <select id="stars-color">
+
+ <option value="">
+ اللون
+ </option>
+
+ <option value="أبيض">أبيض</option>
+ <option value="أحمر">أحمر</option>
+ <option value="موف">موف</option>
+ <option value="بني">بني</option>
+
+ </select>
+
+ </div>
+
+ </div>
+
+ <!-- القلوب -->
+
+ <div class="custom-option">
+
+ <div class="option-title">
+
+ <span>
+ القلوب
+ </span>
+
+ <span>
+ 1 ر.س للحبتين
+ </span>
+
+ </div>
+
+ <div class="quantity-control">
+
+ <button type="button"
+ onclick="changeOptionQuantity('hearts', -1)">
+ −
+ </button>
+
+ <span id="hearts-quantity">
+ 0
+ </span>
+
+ <button type="button"
+ onclick="changeOptionQuantity('hearts', 1)">
+ +
+ </button>
+
+ </div>
+
+ <div id="hearts-color-box"
+ style="display:none; margin-top:15px;">
+
+ <label for="hearts-color">
+ لون تطريز القلوب:
+ </label>
+
+ <select id="hearts-color">
+
+ <option value="">
+ اللون
+ </option>
+
+ <option value="أبيض">أبيض</option>
+ <option value="أحمر">أحمر</option>
+ <option value="موف">موف</option>
+ <option value="بني">بني</option>
+
+ </select>
+
+ </div>
+
+ </div>
+
+ <!-- الأحرف -->
+
+ <div class="custom-option">
+
+ <div class="option-title">
+
+ <span>
+ الأحرف
+ </span>
+
+ <span>
+ 5 ر.س للحرف
+ </span>
+
+ </div>
+
+ <div class="quantity-control">
+
+ <button type="button"
+ onclick="changeOptionQuantity('letters', -1)">
+ −
+ </button>
+
+ <span id="letters-quantity">
+ 0
+ </span>
+
+ <button type="button"
+ onclick="changeOptionQuantity('letters', 1)">
+ +
+ </button>
+
+ </div>
+
+ <div id="letters-details"
+ style="display:none; margin-top:15px;">
+
+ <label for="letters-color">
+ لون تطريز الأحرف:
+ </label>
+
+ <select id="letters-color">
+
+ <option value="">
+ اللون
+ </option>
+
+ <option value="أبيض">أبيض</option>
+ <option value="أحمر">أحمر</option>
+ <option value="موف">موف</option>
+ <option value="بني">بني</option>
+
+ </select>
+
+ <br>
+ <br>
+
+ <label for="custom-letters">
+ الأحرف المطلوبة:
+ </label>
+
+ <p>
+ الأحرف المراد إضافتها.
+ </p>
+
+ <input type="text"
+ id="custom-letters"
+ placeholder="مثال: M A"
+ maxlength="5">
+
+ </div>
+
+ </div>
+
+ </div>
+
+ <!-- =====================================
+ بطاقة الإهداء
+ ====================================== -->
+
+ <div id="gift-note-option"
+ class="product-option"
+ style="display:none;">
+
+ <label for="gift-note">
+ ماذا نكتب على كرت الإهداء؟
+ </label>
+
+ <p>
+ رسالة بطاقة الإهداء
+ </p>
+
+ <textarea id="gift-note"
+ rows="5"
+ placeholder="اكتب الرسالة هنا..."></textarea>
+
+ </div>
+
+ <!-- =====================================
+ الكمية
+ ====================================== -->
+
+ <div class="product-option">
+
+ <label for="product-quantity">
+ الكمية:
+ </label>
+
+ <div class="quantity-control">
+
+ <button type="button"
+ onclick="changeProductQuantity(-1)">
+ −
+ </button>
+
+ <input type="number"
+ id="product-quantity"
+ value="1"
+ min="1">
+
+ <button type="button"
+ onclick="changeProductQuantity(1)">
+ +
+ </button>
+
+ </div>
+
+ </div>
+
+ <!-- =====================================
+ الإجمالي
+ ====================================== -->
+
+ <div class="total-price">
+
+ الإجمالي:
+
+ <strong>
+
+ <span id="total-price">
+ 0
+ </span>
+
+ ر.س
+
+ </strong>
+
+ </div>
+
+ <!-- إضافة للسلة -->
+
+ <button type="button"
+ class="add-cart-btn"
+ onclick="addProductToCart()">
+
+ إضافة للسلة
+
+ </button>
+
+ </div>
+
+</section>
+
+<!-- =========================================
+ نافذة الصورة الكبيرة
+========================================= -->
+
+<div id="image-modal"
+ class="image-modal">
+
+ <span class="image-modal-close"
+ onclick="closeImageModal()">
+
+ ×
+
+ </span>
+
+ <img id="modal-image"
+ src=""
+ alt="صورة المنتج">
+
+</div>
+
+<!-- =========================================
+ FOOTER
+========================================= -->
+
+<footer id="contact">
+
+ <h3>
+ تواصل معنا
+ </h3>
+
+ <a href="https://x.com/Wilfahsa"
+ class="footer-link"
+ target="_blank">
+
+ <img src="x.png"
+ alt="X">
+
+ </a>
+
+ <a href="https://wa.me/966561565969"
+ class="footer-link"
+ target="_blank">
+
+ <img src="whatsapp.PNG"
+ alt="WhatsApp">
+
+ </a>
+
+ <a href="https://www.instagram.com/wilfahsa"
+ class="footer-link"
+ target="_blank">
+
+ <img src="insta.PNG"
+ alt="Instagram">
+
+ </a>
+ <a
+ href="https://www.tiktok.com/@wilfah.sa?_r=1&_t=ZS-99pu411m3y3"
+ class="footer-link"
+ target="_blank">
+
+ <img
+ src="tiktok.PNG"
+ alt="tiktok">
+ </a>
+
+ <p>
+ ©️ 2026 متجر ولفة - جميع الحقوق محفوظة
+ </p>
+
+</footer>
+
+<script>
+
+/* =========================================
+ بيانات المنتجات والأسعار
+========================================= */
+
+const products = {
+
+ blanket: {
+
+ name: "بطانية بوفي",
+
+ images: [
+ "blanket.jpg",
+ "blanket-2.jpg",
+ "blanket-3.jpg",
+ "blanket-4.jpg"
+ ],
+
+ image: "blanket.jpg",
+
+ description:
+
+ "بطانية بوفي ناعمة ومريحة، ويمكن تخصيصها بإضافاتك المفضلة.<br><br>" +
+
+ "الخامة: خيوط البوفي (حياكة يدوية 100%).<br><br>" +
+
+ "مرفق مع كل طلب كرت خاص يحتوي على إرشادات العناية الكاملة.",
+
+ sizes: [
+
+ {
+ name: "90 × 90 سم",
+ price: 142
+ },
+
+ {
+ name: "120 × 110 سم",
+ price: 225
+ },
+
+ {
+ name: "120 × 160 سم",
+ price: 340
+ }
+
+ ]
+
+ },
+
+ shawl: {
+
+ name: "شال بوفي",
+
+ images: [
+ "shawl.jpg",
+ "shawl-2.jpg",
+ "shawl-3.jpg"
+ ],
+
+ image: "shawl.jpg",
+
+ description:
+
+ "شال بوفي ناعم ومريح، ويمكن تخصيصه بإضافاتك المفضلة.<br><br>" +
+
+ "الخامة: خيوط البوفي (حياكة يدوية 100%).<br><br>" +
+
+ "مرفق مع كل طلب كرت خاص يحتوي على إرشادات العناية الكاملة.",
+
+ sizes: [
+
+ {
+ name: "60 × 140 سم",
+ price: 140
+ }
+
+ ]
+
+ },
+
+ gift: {
+
+ name: "تغليف مع بطاقة إهداء",
+
+ price: 10,
+
+ images: [
+ "gift.jpg",
+ "boket.jpg",
+ "gift1.jpg"
+
+ ],
+
+ image: "gift1.jpg",
+
+ description:
+
+ "تغليف أنيق يُقدّم على هيئة باقة باستخدام ورق تغليف فاخر، مع كرت إهداء خاص يمكنك إضافة رسالتك إليه.<br><br>" +
+
+ "مرفق مع كل طلب كرت خاص يحتوي على إرشادات العناية الكاملة.",
+
+ sizes: []
+
+ },
+
+ "colorful-shawl": {
+
+ name: "شال بوفي ملون",
+
+ images: [
+ "colorful-shawl.jpg",
+ "colorful-shawl-2.jpg",
+ "color1.JPG"
+ ],
+
+ image: "colorful-shawl.jpg",
+
+ description:
+
+ "شال بوفي ملون بتصميم مميز يجمع بين ثلاثة ألوان من اختيارك، ليمنحك قطعة فريدة تناسب ذوقك.<br><br>" +
+
+ "الخامة: خيوط البوفي (حياكة يدوية 100%).<br><br>" +
+
+ "مرفق مع كل طلب كرت خاص يحتوي على إرشادات العناية الكاملة.",
+
+ sizes: [
+
+ {
+ name: "65 × 140 سم",
+ price: 170
+ }
+
+ ]
+
+ }
+
+};
+
+/* =========================================
+ قراءة المنتج من الرابط
+========================================= */
+
+const urlParams =
+ new URLSearchParams(window.location.search);
+
+const productId =
+ urlParams.get("product");
+
+const product =
+ products[productId];
+
+/* =========================================
+ عناصر الصفحة
+========================================= */
+
+const productColorOption =
+ document.getElementById("product-color-option");
+
+const productSizeOption =
+ document.getElementById("product-size-option");
+
+const productSize =
+ document.getElementById("product-size");
+
+const customizationOptions =
+ document.getElementById("customization-options");
+
+const colorfulShawlOptions =
+ document.getElementById("colorful-shawl-options");
+
+const giftNoteOption =
+ document.getElementById("gift-note-option");
+
+/* =========================================
+ السعر الأساسي
+========================================= */
+
+let selectedSizePrice = 0;
+
+/* =========================================
+ عرض بيانات المنتج
+========================================= */
+
+if (!product) {
+
+ alert("لم يتم العثور على المنتج.");
+
+} else {
+
+ document.getElementById("product-name").textContent =
+ product.name;
+
+ document.getElementById("product-description").innerHTML =
+ product.description;
+
+ const mainProductImage =
+ document.getElementById("product-image");
+
+ const thumbnailsContainer =
+ document.getElementById("product-thumbnails");
+
+ mainProductImage.src =
+ product.images[0];
+
+ mainProductImage.alt =
+ product.name;
+
+ thumbnailsContainer.innerHTML = "";
+
+ product.images.forEach(function(image, index) {
+
+ const thumbnail =
+ document.createElement("img");
+
+ thumbnail.src =
+ image;
+
+ thumbnail.alt =
+ product.name + " - صورة " + (index + 1);
+
+ thumbnail.className =
+ "product-thumbnail";
+
+ if (index === 0) {
+
+ thumbnail.classList.add("active");
+
+ }
+
+ thumbnail.addEventListener("click", function() {
+
+ mainProductImage.src =
+ image;
+
+ document
+.querySelectorAll(".product-thumbnail")
+.forEach(function(item) {
+
+ item.classList.remove("active");
+
+ });
+
+ thumbnail.classList.add("active");
+
+ });
+
+ thumbnailsContainer.appendChild(thumbnail);
+
+ });
+
+ if (product.sizes.length > 0) {
+
+ productSize.innerHTML = `
+
+ <option value="">
+ المقاس
+ </option>
+
+ `;
+
+ product.sizes.forEach(function(size) {
+
+ const option =
+ document.createElement("option");
+
+ option.value =
+ size.name;
+
+ option.textContent =
+ size.name;
+
+ option.dataset.price =
+ size.price;
+
+ productSize.appendChild(option);
+
+ });
+
+ }
+
+ if (productId === "gift") {
+
+ productColorOption.style.display =
+ "none";
+
+ productSizeOption.style.display =
+ "none";
+
+ customizationOptions.style.display =
+ "none";
+
+ giftNoteOption.style.display =
+ "block";
+
+ selectedSizePrice =
+ product.price;
+
+ document.getElementById("product-price").textContent =
+ product.price;
+
+ document.getElementById("total-price").textContent =
+ product.price;
+
+ }
+
+ else if (productId === "colorful-shawl") {
+
+ productColorOption.style.display =
+ "none";
+
+ colorfulShawlOptions.style.display =
+ "block";
+
+ }
+
+ else {
+
+ productColorOption.style.display =
+ "block";
+
+ }
+
+}
+
+productSize.addEventListener(
+ "change",
+ function() {
+
+ const selectedOption =
+ productSize.options[
+ productSize.selectedIndex
+ ];
+
+ if (
+ !selectedOption ||
+ !selectedOption.dataset.price
+ ) {
+
+ selectedSizePrice = 0;
+
+ document.getElementById("product-price").textContent =
+ "0";
+
+ document.getElementById("total-price").textContent =
+ "0";
+
+ return;
+
+ }
+
+ selectedSizePrice =
+ Number(selectedOption.dataset.price);
+
+ document.getElementById("product-price").textContent =
+ selectedSizePrice;
+
+ updateTotalPrice();
+
+ }
+);
+
+/* =========================================
+ أسعار الإضافات (تم تعديلها هنا)
+========================================= */
+
+const optionPrices = {
+
+ stars: 1,    // 1 ر.س للحبة
+
+ hearts: 0.5, // 1 ر.س للحبتين (0.5 للحبة)
+
+ letters: 5   // 5 ر.س للحرف
+
+};
+
+let options = {
+
+ stars: 0,
+
+ hearts: 0,
+
+ letters: 0
+
+};
+
+function changeOptionQuantity(option, amount) {
+
+ options[option] += amount;
+
+ if (options[option] < 0) {
+
+ options[option] = 0;
+
+ }
+
+ document.getElementById(
+ option + "-quantity"
+ ).textContent =
+ options[option];
+
+ if (option === "stars") {
+
+ const box =
+ document.getElementById("stars-color-box");
+
+ if (options.stars > 0) {
+
+ box.style.display = "block";
+
+ } else {
+
+ box.style.display = "none";
+
+ document.getElementById("stars-color").value =
+ "";
+
+ }
+
+ }
+
+ if (option === "hearts") {
+
+ const box =
+ document.getElementById("hearts-color-box");
+
+ if (options.hearts > 0) {
+
+ box.style.display = "block";
+
+ } else {
+
+ box.style.display = "none";
+
+ document.getElementById("hearts-color").value =
+ "";
+
+ }
+
+ }
+
+ if (option === "letters") {
+
+ const details =
+ document.getElementById("letters-details");
+
+ if (options.letters > 0) {
+
+ details.style.display = "block";
+
+ } else {
+
+ details.style.display = "none";
+
+ document.getElementById("letters-color").value =
+ "";
+
+ document.getElementById("custom-letters").value =
+ "";
+
+ }
+
+ }
+
+ updateTotalPrice();
+
+}
+
+function changeProductQuantity(amount) {
+
+ const quantityInput =
+ document.getElementById("product-quantity");
+
+ let quantity =
+ parseInt(quantityInput.value) || 1;
+
+ quantity += amount;
+
+ if (quantity < 1) {
+
+ quantity = 1;
+
+ }
+
+ quantityInput.value =
+ quantity;
+
+ updateTotalPrice();
+
+}
+
+function updateTotalPrice() {
+
+ if (!product) {
+
+ return;
+
+ }
+
+ const quantity =
+ parseInt(
+ document.getElementById("product-quantity").value
+ ) || 1;
+
+ let singleProductPrice =
+ selectedSizePrice;
+
+ if (productId === "gift") {
+
+ singleProductPrice =
+ product.price;
+
+ }
+
+ if (
+ productId === "blanket" ||
+ productId === "shawl"
+ ) {
+
+ const customizationPrice =
+
+ (options.stars *
+ optionPrices.stars)
+
+ +
+
+ (options.hearts *
+ optionPrices.hearts)
+
+ +
+
+ (options.letters *
+ optionPrices.letters);
+
+ singleProductPrice +=
+ customizationPrice;
+
+ }
+
+ const total =
+ singleProductPrice * quantity;
+
+ document.getElementById("total-price").textContent =
+ total;
+
+}
+
+function addProductToCart() {
+
+ if (!product) {
+
+ alert(
+ "لم يتم العثور على المنتج."
+ );
+
+ return;
+
+ }
+
+ const quantity =
+ parseInt(
+ document.getElementById("product-quantity").value
+ );
+
+ if (!quantity || quantity < 1) {
+
+ alert(
+ "اختر كمية صحيحة."
+ );
+
+ return;
+
+ }
+
+ if (productId === "gift") {
+
+ const giftNote =
+ document.getElementById("gift-note").value.trim();
+
+ if (!giftNote) {
+
+ alert(
+ "اكتب الرسالة التي تريد وضعها على كرت الإهداء."
+ );
+
+ return;
+
+ }
+
+ let cart =
+ JSON.parse(
+ localStorage.getItem("cart")
+ ) || [];
+
+ const existingProduct =
+ cart.find(function(item) {
+
+ return (
+
+ item.name === product.name
+
+ &&
+
+ item.giftNote === giftNote
+
+ );
+
+ });
+
+ if (existingProduct) {
+
+ existingProduct.quantity +=
+ quantity;
+
+ } else {
+
+ cart.push({
+
+ name:
+ product.name,
+
+ price:
+ product.price,
+
+ basePrice:
+ product.price,
+
+ quantity:
+ quantity,
+
+ giftNote:
+ giftNote
+
+ });
+
+ }
+
+ localStorage.setItem(
+ "cart",
+ JSON.stringify(cart)
+ );
+
+ alert(
+ "تمت إضافة المنتج إلى السلة 🛒"
+ );
+
+ window.location.href =
+ "cart.html";
+
+ return;
+
+ }
+
+ if (productId === "colorful-shawl") {
+
+ const color1 =
+ document.getElementById("shawl-color-1").value;
+
+ const color2 =
+ document.getElementById("shawl-color-2").value;
+
+ const color3 =
+ document.getElementById("shawl-color-3").value;
+
+ const size =
+ document.getElementById("product-size").value;
+
+ if (!color1 ||!color2 ||!color3) {
+
+ alert(
+ "اختر الألوان الثلاثة للشال."
+ );
+
+ return;
+
+ }
+
+ if (
+ color1 === color2 ||
+ color1 === color3 ||
+ color2 === color3
+ ) {
+
+ alert(
+ "اختر ثلاثة ألوان مختلفة للشال."
+ );
+
+ return;
+
+ }
+
+ if (!size) {
+
+ alert(
+ "اختر المقاس."
+ );
+
+ return;
+
+ }
+
+ const selectedOption =
+ productSize.options[
+ productSize.selectedIndex
+ ];
+
+ const sizePrice =
+ Number(
+ selectedOption.dataset.price
+ );
+
+ let cart =
+ JSON.parse(
+ localStorage.getItem("cart")
+ ) || [];
+
+ const existingProduct =
+ cart.find(function(item) {
+
+ return (
+
+ item.name === product.name
+
+ &&
+
+ item.color1 === color1
+
+ &&
+
+ item.color2 === color2
+
+ &&
+
+ item.color3 === color3
+
+ &&
+
+ item.size === size
+
+ );
+
+ });
+
+ if (existingProduct) {
+
+ existingProduct.quantity +=
+ quantity;
+
+ } else {
+
+ cart.push({
+
+ name:
+ product.name,
+
+ price:
+ sizePrice,
+
+ basePrice:
+ sizePrice,
+
+ quantity:
+ quantity,
+
+ color1:
+ color1,
+
+ color2:
+ color2,
+
+ color3:
+ color3,
+
+ size:
+ size
+
+ });
+
+ }
+
+ localStorage.setItem(
+ "cart",
+ JSON.stringify(cart)
+ );
+
+ alert(
+ "تمت إضافة المنتج إلى السلة 🛒"
+ );
+
+ window.location.href =
+ "cart.html";
+
+ return;
+
+ }
+
+ const color =
+ document.getElementById("product-color").value;
+
+ const size =
+ document.getElementById("product-size").value;
+
+ if (!color) {
+
+ alert(
+ "اختر اللون."
+ );
+
+ return;
+
+ }
+
+ if (!size) {
+
+ alert(
+ "اختر المقاس."
+ );
+
+ return;
+
+ }
+
+ const selectedOption =
+ productSize.options[
+ productSize.selectedIndex
+ ];
+
+ const sizePrice =
+ Number(
+ selectedOption.dataset.price
+ );
+
+ let starsColor = "";
+
+ if (options.stars > 0) {
+
+ starsColor =
+ document.getElementById("stars-color").value;
+
+ if (!starsColor) {
+
+ alert(
+ "اختر لون تطريز النجوم."
+ );
+
+ return;
+
+ }
+
+ }
+
+ let heartsColor = "";
+
+ if (options.hearts > 0) {
+
+ heartsColor =
+ document.getElementById("hearts-color").value;
+
+ if (!heartsColor) {
+
+ alert(
+ "اختر لون تطريز القلوب."
+ );
+
+ return;
+
+ }
+
+ }
+
+ let lettersColor = "";
+
+ let customLetters = "";
+
+ if (options.letters > 0) {
+
+ lettersColor =
+ document.getElementById("letters-color").value;
+
+ customLetters =
+ document.getElementById("custom-letters").value.trim();
+
+ if (!lettersColor) {
+
+ alert(
+ "اختر لون تطريز الأحرف."
+ );
+
+ return;
+
+ }
+
+ if (!customLetters) {
+
+ alert(
+ "اكتب الأحرف التي تريد إضافتها."
+ );
+
+ return;
+
+ }
+
+ const lettersArray =
+ customLetters
+.split(/\s+/)
+.filter(Boolean);
+
+ if (
+ lettersArray.length!== options.letters
+ ) {
+
+ alert(
+ "عدد الأحرف المكتوبة يجب أن يطابق عدد الأحرف المختارة."
+ );
+
+ return;
+
+ }
+
+ }
+
+ const customizationPrice =
+
+ (options.stars *
+ optionPrices.stars)
+
+ +
+
+ (options.hearts *
+ optionPrices.hearts)
+
+ +
+
+ (options.letters *
+ optionPrices.letters);
+
+ const singleProductPrice =
+
+ sizePrice +
+ customizationPrice;
+
+ let cart =
+ JSON.parse(
+ localStorage.getItem("cart")
+ ) || [];
+
+ const existingProduct =
+ cart.find(function(item) {
+
+ return (
+
+ item.name === product.name
+
+ &&
+
+ item.color === color
+
+ &&
+
+ item.size === size
+
+ &&
+
+ item.stars === options.stars
+
+ &&
+
+ item.starsColor === starsColor
+
+ &&
+
+ item.hearts === options.hearts
+
+ &&
+
+ item.heartsColor === heartsColor
+
+ &&
+
+ item.letters === options.letters
+
+ &&
+
+ item.lettersColor === lettersColor
+
+ &&
+
+ item.customLetters === customLetters
+
+ );
+
+ });
+
+ if (existingProduct) {
+
+ existingProduct.quantity +=
+ quantity;
+
+ } else {
+
+ cart.push({
+
+ name:
+ product.name,
+
+ price:
+ singleProductPrice,
+
+ basePrice:
+ sizePrice,
+
+ quantity:
+ quantity,
+
+ color:
+ color,
+
+ size:
+ size,
+
+ stars:
+ options.stars,
+
+ starsColor:
+ starsColor,
+
+ hearts:
+ options.hearts,
+
+ heartsColor:
+ heartsColor,
+
+ letters:
+ options.letters,
+
+ lettersColor:
+ lettersColor,
+
+ customLetters:
+ customLetters
+
+ });
+
+ }
+
+ localStorage.setItem(
+ "cart",
+ JSON.stringify(cart)
+ );
+
+ alert(
+ "تمت إضافة المنتج إلى السلة 🛒"
+ );
+
+ window.location.href =
+ "cart.html";
+
+}
+
+const productImage =
+ document.getElementById("product-image");
+
+const imageModal =
+ document.getElementById("image-modal");
+
+const modalImage =
+ document.getElementById("modal-image");
+
+productImage.addEventListener(
+ "click",
+ function() {
+
+ modalImage.src =
+ productImage.src;
+
+ imageModal.classList.add(
+ "active"
+ );
+
+ }
+);
+
+function closeImageModal() {
+
+ imageModal.classList.remove(
+ "active"
+ );
+
+}
+
+imageModal.addEventListener(
+ "click",
+ function(event) {
+
+ if (
+ event.target === imageModal
+ ) {
+
+ closeImageModal();
+
+ }
+
+ }
+);
+
+document.addEventListener(
+ "keydown",
+ function(event) {
+
+ if (
+ event.key === "Escape"
+ ) {
+
+ closeImageModal();
+
+ }
+
+ }
+);
+
+</script>
+
+</body>
+
+</html>
         .product-thumbnails {
             display: flex;
             gap: 10px;
