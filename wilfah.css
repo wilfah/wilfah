@@ -658,20 +658,31 @@ footer p::first-letter {
 @media (max-width: 768px) {
 
     header {
-        padding: 12px 4%;
+        padding: 12px 5%;
     }
 
     nav {
+        display: flex;
         flex-direction: column;
         gap: 12px;
     }
 
-    /* إصلاح القائمة الرئيسية لتكون أفقيّة وبجانب بعض */
+    /* جعل اللوجو والسلة بجانب بعض في أعلى الهيدر */
+    .header-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+
+    /* القائمة أفقية تحت اللوجو والسلة */
     nav ul {
+        display: flex;
         flex-direction: row;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 12px;
+        gap: 15px;
+        width: 100%;
     }
 
     nav ul li a {
@@ -706,7 +717,7 @@ footer p::first-letter {
         margin-bottom: 25px;
     }
 
-    /* إصلاح عرض المنتجات لتكون منتجين جنب بعض */
+    /* المنتجات 2 جنب بعض */
     .cards {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -748,18 +759,11 @@ footer p::first-letter {
         text-align: center;
     }
 
-    .about h2 {
-        font-size: 26px;
-    }
-
-    .about p {
-        font-size: 16px;
-    }
-
     footer {
         padding: 35px 15px;
         margin-top: 30px;
     }
+}
 
     footer h3 {
         font-size: 22px;
