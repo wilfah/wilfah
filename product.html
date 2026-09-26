@@ -865,8 +865,7 @@ const products = {
 const urlParams =
  new URLSearchParams(window.location.search);
 
-const productId =
- urlParams.get("product");
+const productId = urlParams.get("id") || urlParams.get("product");
 
 const product =
  products[productId];
