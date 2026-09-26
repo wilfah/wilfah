@@ -9,6 +9,9 @@
 
     <title>سلة التسوق | ولفة</title>
 
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
     <link rel="stylesheet" href="wilfah.css">
 
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
@@ -70,8 +73,27 @@
         }
 
         .cart-product-info p {
-            margin: 5px 0;
+            margin: 4px 0;
             color: #555;
+            font-size: 14px;
+        }
+
+        .cart-product-details {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px dashed #e5dccf;
+        }
+
+        .cart-product-details span {
+            display: inline-block;
+            background: #faf8f4;
+            border: 1px solid #e5dccf;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin-left: 5px;
+            margin-bottom: 5px;
+            color: #4c280c;
         }
 
         .quantity-controls {
@@ -90,6 +112,9 @@
             color: white;
             cursor: pointer;
             font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .quantity-number {
@@ -111,6 +136,11 @@
             border-radius: 7px;
             cursor: pointer;
             font-family: inherit;
+            transition: 0.2s;
+        }
+
+        .remove-button:hover {
+            background: #ffd8d8;
         }
 
         .cart-card {
@@ -472,42 +502,28 @@
 
 
 <header>
-
     <nav>
+        <!-- الجزء العلوي: اللوجو باليمين والسلة باليسار -->
+        <div class="header-top">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="wilfah%20logo.jpg" alt="ولفة">
+                </a>
+            </div>
 
-        <div class="logo">
-
-            <img
-                src="wilfah logo.jpg"
-                alt="ولفة">
-
+            <a href="cart.html" class="cart-btn">
+                <img src="./cart1.png" alt="سلة التسوق">
+            </a>
         </div>
 
-
+        <!-- القائمة الرئيسية -->
         <ul>
-
-            <li>
-                <a href="wilfah.html">
-                    الرئيسية
-                </a>
-            </li>
-
-            <li>
-                <a href="products.html">
-                    المنتجات
-                </a>
-            </li>
-
-            <li>
-                <a href="cart.html">
-                    السلة
-                </a>
-            </li>
-
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="products.html">المنتجات</a></li>
+            <li><a href="index.html#about">من نحن</a></li>
+            <li><a href="#contact">تواصل</a></li>
         </ul>
-
     </nav>
-
 </header>
 
 
@@ -897,7 +913,7 @@
                 <input
                     type="file"
                     id="receipt"
-accept="image/*,application/pdf,.pdf"
+                    accept="image/*,application/pdf,.pdf">
 
                 <small class="form-note">
 
@@ -1012,16 +1028,11 @@ accept="image/*,application/pdf,.pdf"
         تواصل معنا
     </h3>
 
-
-    <a
-        href="https://x.com/Wilfahsa"
-        class="footer-link"
-        target="_blank">
-
-        <img
-            src="x.png"
-            alt="X">
-
+    <!-- أيقونة تويتر/X باستخدام SVG مضمون الظهور -->
+    <a href="https://x.com/Wilfahsa" class="footer-link" target="_blank" aria-label="X Twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
     </a>
 
 
@@ -1048,7 +1059,7 @@ accept="image/*,application/pdf,.pdf"
 
     </a>
     
-<a
+    <a
         href="https://www.tiktok.com/@wilfah.sa?_r=1&_t=ZS-99pu411m3y3"
         class="footer-link"
         target="_blank">
@@ -1059,7 +1070,7 @@ accept="image/*,application/pdf,.pdf"
 
     </a>
     <p>
-        ©️ 2025 متجر ولفة - جميع الحقوق محفوظة
+        ©️ 2026 متجر ولفة - جميع الحقوق محفوظة
     </p>
 
 </footer>
@@ -1189,6 +1200,19 @@ function displayCart() {
                         class="cart-product-image">
                       </div>`;
 
+            // تجهيز تفاصيل الخيارات المخصصة للمنتج
+            let detailsHTML = '';
+
+            if (product.color) detailsHTML += `<span>اللون: ${product.color}</span>`;
+            if (product.color1 && product.color2 && product.color3) {
+                detailsHTML += `<span>الألوان: ${product.color1} / ${product.color2} / ${product.color3}</span>`;
+            }
+            if (product.size) detailsHTML += `<span>المقاس: ${product.size}</span>`;
+            if (product.stars > 0) detailsHTML += `<span>نجوم: ${product.stars} (لون: ${product.starsColor})</span>`;
+            if (product.hearts > 0) detailsHTML += `<span>قلوب: ${product.hearts} (لون: ${product.heartsColor})</span>`;
+            if (product.letters > 0) detailsHTML += `<span>أحرف: ${product.customLetters} (لون: ${product.lettersColor})</span>`;
+            if (product.giftNote) detailsHTML += `<span>رسالة الإهداء: ${product.giftNote}</span>`;
+
 
             cartItems.innerHTML += `
 
@@ -1205,11 +1229,12 @@ function displayCart() {
 
 
                         <p>
-                            السعر:
+                            السعر الفردي:
                             ${product.price}
                             ر.س
                         </p>
 
+                        ${detailsHTML ? `<div class="cart-product-details">${detailsHTML}</div>` : ''}
 
                         <p class="product-total">
 
@@ -1284,18 +1309,16 @@ function changeQuantity(index, amount) {
             localStorage.getItem("cart")
         ) || [];
 
+    let newQuantity = Number(cart[index].quantity) + amount;
 
-    cart[index].quantity =
-        Number(cart[index].quantity) +
-        amount;
-
-
-    if (
-        cart[index].quantity <= 0
-    ) {
-
-        cart.splice(index, 1);
-
+    if (newQuantity <= 0) {
+        if (confirm("هل ترغب في حذف هذا المنتج من السلة؟")) {
+            cart.splice(index, 1);
+        } else {
+            return;
+        }
+    } else {
+        cart[index].quantity = newQuantity;
     }
 
 
@@ -2125,17 +2148,17 @@ async function completeOrder() {
 
         if (orderError) {
 
-    console.error("ORDER ERROR:", orderError);
+            console.error("ORDER ERROR:", orderError);
 
-    alert(
-        "خطأ Supabase:\n\n" +
-        JSON.stringify(orderError, null, 2)
-    );
+            alert(
+                "خطأ Supabase:\n\n" +
+                JSON.stringify(orderError, null, 2)
+            );
 
-    throw new Error(
-        "تعذر حفظ الطلب."
-    );
-}
+            throw new Error(
+                "تعذر حفظ الطلب."
+            );
+        }
 
 
         /* =========================
@@ -2168,8 +2191,7 @@ async function completeOrder() {
         );
 
 
-        localStorage.removeItem("cart");
-window.location.reload();
+        window.location.reload();
 
 
     } catch (error) {
