@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -8,38 +7,41 @@
 
     <title>منتجات ولفة</title>
 
-    <link rel="stylesheet" href="wilfah.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
-        rel="stylesheet">
+    <!-- Cairo Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="wilfah.css">
 </head>
 
 <body>
 
 <header>
-
     <nav>
+        <!-- الجزء العلوي: اللوجو باليمين والسلة باليسار -->
+        <div class="header-top">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="wilfah%20logo.jpg" alt="ولفة">
+                </a>
+            </div>
 
-        <div class="logo">
-            <img src="wilfah logo.jpg" alt="ولفة">
+            <a href="cart.html" class="cart-btn">
+                <img src="./cart1.png" alt="سلة التسوق">
+            </a>
         </div>
 
+        <!-- القائمة الرئيسية -->
         <ul>
-            <li>
-                <a href="index.html">الرئيسية</a>
-            </li>
-
-            <li>
-                <a href="products.html">المنتجات</a>
-            </li>
-
-            <li>
-                <a href="cart.html">السلة</a>
-            </li>
+            <li><a href="index.html">الرئيسية</a></li>
+            <li><a href="products.html">المنتجات</a></li>
+            <li><a href="index.html#about">من نحن</a></li>
+            <li><a href="#contact">تواصل</a></li>
         </ul>
-
     </nav>
-
 </header>
 
 
@@ -49,120 +51,59 @@
 
     <div class="cards">
 
-    <!-- المنتج الأول: بطانية بوفي -->
-    <a href="product.html?product=blanket"
-       class="card-link">
+        <!-- المنتج الأول: بطانية بوفي -->
+        <a href="product.html?product=blanket" class="card-link">
+            <div class="card">
+                <img src="blanket.jpg" alt="بطانية بوفي">
+                <h3>بطانية بوفي</h3>
+                <p>0 ر.س</p>
+                <span class="product-details-btn">عرض المنتج</span>
+            </div>
+        </a>
 
-        <div class="card">
+        <!-- المنتج الثاني: شال بوفي -->
+        <a href="product.html?product=shawl" class="card-link">
+            <div class="card">
+                <img src="shawl.jpg" alt="شال بوفي">
+                <h3>شال بوفي</h3>
+                <p>0 ر.س</p>
+                <span class="product-details-btn">عرض المنتج</span>
+            </div>
+        </a>
 
-            <img src="blanket.jpg"
-                 alt="بطانية بوفي">
+        <!-- المنتج الثالث: تغليف مع بطاقة إهداء -->
+        <a href="product.html?product=gift" class="card-link">
+            <div class="card">
+                <img src="gift1.jpg" alt="تغليف مع بطاقة إهداء">
+                <h3>تغليف مع بطاقة إهداء</h3>
+                <p>10 ر.س</p>
+                <span class="product-details-btn">عرض المنتج</span>
+            </div>
+        </a>
 
-            <h3>
-                بطانية بوفي
-            </h3>
-
-            <p>
-                0 ر.س
-            </p>
-
-            <span class="product-details-btn">
-                عرض المنتج
-            </span>
-
-        </div>
-
-    </a>
-
-
-    <!-- المنتج الثاني: شال بوفي -->
-    <a href="product.html?product=shawl"
-       class="card-link">
-
-        <div class="card">
-
-            <img src="shawl.jpg"
-                 alt="شال بوفي">
-
-            <h3>
-                شال بوفي
-            </h3>
-
-            <p>
-                0 ر.س
-            </p>
-
-            <span class="product-details-btn">
-                عرض المنتج
-            </span>
-
-        </div>
-
-    </a>
-
-
-    <!-- المنتج الثالث: تغليف مع بطاقة إهداء -->
-    <a href="product.html?product=gift"
-       class="card-link">
-
-        <div class="card">
-
-            <img src="gift1.jpg"
-                 alt="تغليف مع بطاقة إهداء">
-
-            <h3>
-                تغليف مع بطاقة إهداء
-            </h3>
-
-            <p>
-                10 ر.س
-            </p>
-
-            <span class="product-details-btn">
-                عرض المنتج
-            </span>
-
-        </div>
-
-    </a>
-
-
-    <!-- المنتج الرابع: شال بوفي ملون -->
-    <a href="product.html?product=colorful-shawl"
-       class="card-link">
-
-        <div class="card">
-
-            <img src="colorful-shawl.jpg"
-                 alt="شال بوفي ملون">
-
-            <h3>
-                شال بوفي ملون
-            </h3>
-
-            <p>
-                0 ر.س
-            </p>
-
-            <span class="product-details-btn">
-                عرض المنتج
-            </span>
-
-        </div>
-
-    </a>
-
-</div>
-
+        <!-- المنتج الرابع: شال بوفي ملون -->
+        <a href="product.html?product=colorful-shawl" class="card-link">
+            <div class="card">
+                <img src="colorful-shawl.jpg" alt="شال بوفي ملون">
+                <h3>شال بوفي ملون</h3>
+                <p>0 ر.س</p>
+                <span class="product-details-btn">عرض المنتج</span>
+            </div>
+        </a>
 
     </div>
 
 </section>
+
+
 <footer id="contact">
     <h3>تواصل معنا</h3>
 
-    <a href="https://x.com/Wilfahsa" class="footer-link" target="_blank">
-        <img src="x.png" alt="X">
+    <!-- أيقونة تويتر/X باستخدام SVG مضمون الظهور -->
+    <a href="https://x.com/Wilfahsa" class="footer-link" target="_blank" aria-label="X Twitter">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
     </a>
 
     <a href="https://wa.me/966561565969" class="footer-link" target="_blank">
@@ -172,21 +113,13 @@
     <a href="https://www.instagram.com/wilfahsa" class="footer-link" target="_blank">
         <img src="insta.PNG" alt="Instagram">
     </a>
-<a
-  href="https://www.tiktok.com/@wilfah.sa?_r=1&_t=ZS-99pu411m3y3"
-        class="footer-link"
-        target="_blank">
 
-        <img
-            src="tiktok.PNG"
-            alt="tiktok"> </a>
-    <p>© 2025 متجر ولفة - جميع الحقوق محفوظة</p>
+    <a href="https://www.tiktok.com/@wilfah.sa?_r=1&_t=ZS-99pu411m3y3" class="footer-link" target="_blank">
+        <img src="tiktok.PNG" alt="TikTok">
+    </a>
+
+    <p>©️ 2025 متجر ولفة - جميع الحقوق محفوظة</p>
 </footer>
 
-
-    
-
-
 </body>
-
 </html>
