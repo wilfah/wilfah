@@ -22,6 +22,13 @@
             background-color: #f2ead5; /* خلفية البيج الدافي الأصلي للمتجر */
         }
 
+        /* توحيد لون الهيدر مع الخلفية وإزالة الظل */
+        header {
+            background-color: #f2ead5 !important;
+            box-shadow: none !important;
+            border: none !important;
+        }
+
         /* تنسيق القسم الترحيبي بالصورة */
         .hero-section {
             width: 100%;
@@ -81,8 +88,9 @@
             justify-content: center;
         }
 
+        /* تعديل خلفية بطاقة المنتج إلى اللون البيج */
         .product-card {
-            background: #ffffff;
+            background-color: #f2ead5;
             border: 1px solid #e5dccf;
             border-radius: 18px;
             padding: 12px;
@@ -186,7 +194,7 @@
 </header>
 
 <main>
-    <!-- القسم الترحيبي ببصمة هويتكم الجميله -->
+    <!-- القسم الترحيبي -->
     <section class="hero-section">
         <img src="hedar%20wilfah.jpg" alt="نحيك الدفء بخيوطنا" class="hero-img">
         <div class="hero-action">
@@ -206,7 +214,7 @@
                     <img src="blanket.jpg" alt="بطانية بوفي" onerror="this.src='wilfah%20logo.jpg'">
                 </a>
                 <h3>بطانية بوفي</h3>
-                <p class="price">تبدأ من 150 ر.س</p>
+                <p class="price">الرجاء اختيار المقاس</p>
                 <a href="product-details.html?id=blanket" class="btn-view-product">عرض المنتج</a>
             </div>
 
@@ -216,7 +224,7 @@
                     <img src="shawl.jpg" alt="شال بوفي" onerror="this.src='wilfah%20logo.jpg'">
                 </a>
                 <h3>شال بوفي</h3>
-                <p class="price">تبدأ من 80 ر.س</p>
+                <p class="price">الرجاء اختيار المقاس</p>
                 <a href="product-details.html?id=shawl" class="btn-view-product">عرض المنتج</a>
             </div>
 
