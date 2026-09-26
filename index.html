@@ -24,44 +24,44 @@
 
         .products-section {
             max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
+            margin: 30px auto;
+            padding: 0 15px;
             text-align: center;
         }
 
         .products-section h2 {
             color: #4c280c;
-            font-size: 28px;
-            margin-bottom: 30px;
+            font-size: 26px;
+            margin-bottom: 25px;
         }
 
+        /* شبكة المنتجات لتعرض منتجين بجانب بعض */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             justify-content: center;
         }
 
         .product-card {
             background: #ffffff;
             border: 1px solid #e5dccf;
-            border-radius: 18px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+        .product-card-link {
+            width: 100%;
+            display: block;
         }
 
         .product-card img {
             width: 100%;
-            height: 220px;
+            height: 160px;
             object-fit: cover;
             border-radius: 12px;
             background-color: #f2ead5;
@@ -69,32 +69,55 @@
 
         .product-card h3 {
             color: #4c280c;
-            margin: 15px 0 8px 0;
-            font-size: 20px;
+            margin: 10px 0 4px 0;
+            font-size: 16px;
         }
 
         .product-card .price {
             color: #777;
-            font-size: 16px;
-            margin-bottom: 15px;
+            font-size: 13px;
+            margin-bottom: 12px;
             font-weight: 600;
         }
 
         .btn-view-product {
-            display: inline-block;
+            display: block;
             width: 100%;
             background-color: #4c280c;
             color: #ffffff;
             text-decoration: none;
-            padding: 10px 0;
-            border-radius: 25px;
+            padding: 8px 0;
+            border-radius: 20px;
             font-weight: bold;
-            font-size: 15px;
+            font-size: 13px;
+            text-align: center;
             transition: background-color 0.2s;
         }
 
         .btn-view-product:hover {
             background-color: #351c08;
+        }
+
+        @media (min-width: 768px) {
+            .products-grid {
+                gap: 25px;
+            }
+            .product-card {
+                padding: 18px;
+            }
+            .product-card img {
+                height: 240px;
+            }
+            .product-card h3 {
+                font-size: 20px;
+            }
+            .product-card .price {
+                font-size: 15px;
+            }
+            .btn-view-product {
+                padding: 10px 0;
+                font-size: 15px;
+            }
         }
     </style>
 </head>
@@ -126,15 +149,14 @@
 
 <main>
     <section class="products-section">
-        <h2>الأكثر مبيعاً</h2>
+        <h2>الأكثر مبيعاً 🔥</h2>
 
         <div class="products-grid">
             
-            <!-- المنتح الأول: بطانية بوفي -->
+            <!-- المنتج الأول: بطانية بوفي -->
             <div class="product-card">
-                <!-- Yaadasa: Maqaa suuraa keessan isa sirrii (fakk. blanket.jpg) asitti jijjiiraa -->
-                <a href="product-details.html?id=blanket">
-                    <img src="blanket.jpg" alt="بطانية بوفي" onerror="this.src='wilfah logo.jpg'">
+                <a href="product-details.html?id=blanket" class="product-card-link">
+                    <img src="blanket.jpg" alt="بطانية بوفي" onerror="this.src='wilfah%20logo.jpg'">
                 </a>
                 <h3>بطانية بوفي</h3>
                 <p class="price">تبدأ من 150 ر.س</p>
@@ -143,9 +165,8 @@
 
             <!-- المنتج الثاني: شال بوفي -->
             <div class="product-card">
-                <!-- Yaadasa: Maqaa suuraa keessan isa sirrii (fakk. shawl.jpg) asitti jijjiiraa -->
-                <a href="product-details.html?id=shawl">
-                    <img src="shawl.jpg" alt="شال بوفي" onerror="this.src='wilfah logo.jpg'">
+                <a href="product-details.html?id=shawl" class="product-card-link">
+                    <img src="shawl.jpg" alt="شال بوفي" onerror="this.src='wilfah%20logo.jpg'">
                 </a>
                 <h3>شال بوفي</h3>
                 <p class="price">تبدأ من 80 ر.س</p>
@@ -156,9 +177,9 @@
     </section>
 
     <!-- قسم من نحن -->
-    <section id="about" class="products-section" style="text-align: right; max-width: 800px;">
+    <section id="about" class="products-section" style="text-align: right; max-width: 800px; margin-top: 50px;">
         <h2>من نحن</h2>
-        <ul>
+        <ul style="line-height: 1.9; color: #4c280c; font-size: 15px;">
             <li>نؤمن في ولفة أن الدفء قطعة تُحاك بكل حب.</li>
             <li>حياكة يدوية 100% بأجود خامات الصوف.</li>
             <li>تصفح مجموعتنا أو تواصل معنا لصنع قطعتك الخاصة.</li>
