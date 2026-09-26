@@ -848,3 +848,27 @@ footer p::first-letter {
     .image-modal-prev { left: 8px; }
     .image-modal-next { right: 8px; }
 }
+/* 1. توحيد ارتفاع الكروت داخل شبكة المنتجات */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    align-items: stretch; /* تجعل جميع الكروت في نفس الصف بنفس الارتفاع تماماً */
+}
+
+/* 2. جعل الكرت يستغل كامل الارتفاع وتوزيع محتواه */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+/* 3. إعطاء مساحة ثابتة للعنوان تكفي سطرين لكل الكروت */
+.product-card h3 {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
