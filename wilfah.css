@@ -149,6 +149,7 @@ nav ul li a:hover {
 .card-link {
     text-decoration: none;
     color: inherit;
+    display: block;
 }
 
 .card {
@@ -381,6 +382,10 @@ footer p::first-letter {
 
 .product-image-box {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .product-main-image {
@@ -391,47 +396,11 @@ footer p::first-letter {
     object-fit: cover;
 }
 
-.product-info h1 {
-    color: #4c280c;
-    font-size: 35px;
-    margin-bottom: 15px;
-}
-
-#product-description {
-    font-size: 18px;
-    line-height: 2;
-    margin-bottom: 20px;
-}
-
 .product-price {
     font-size: 28px;
     font-weight: 700;
     color: #4c280c;
     margin-bottom: 30px;
-}
-
-
-/* =================================
-   PRODUCT OPTIONS
-================================= */
-
-.product-option {
-    margin-bottom: 25px;
-}
-
-.product-option label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 600;
-}
-
-.product-option select {
-    width: 100%;
-    padding: 15px;
-    border: 1px solid #d8cbb7;
-    border-radius: 12px;
-    background: #fff;
-    font-family: "Cairo", sans-serif;
 }
 
 
@@ -533,7 +502,7 @@ footer p::first-letter {
 
 
 /* =================================
-   TOTAL PRICE
+   TOTAL PRICE & ADD TO CART
 ================================= */
 
 .total-price {
@@ -548,11 +517,6 @@ footer p::first-letter {
     color: #4c280c;
     font-size: 25px;
 }
-
-
-/* =================================
-   ADD TO CART
-================================= */
 
 .add-cart-btn {
     width: 100%;
@@ -572,210 +536,9 @@ footer p::first-letter {
 }
 
 
-/* =================================
-   MOBILE
-================================= */
-
-@media (max-width: 768px) {
-
-    header {
-        padding: 15px 5%;
-    }
-
-    nav {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    nav ul {
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-    }
-
-    .hero {
-        flex-direction: column;
-        text-align: center;
-        padding: 50px 8%;
-    }
-
-    .text,
-    .image {
-        width: 100%;
-    }
-
-    .text h1 {
-        font-size: 36px;
-    }
-
-    .image img {
-        margin-top: 30px;
-    }
-
-    .products {
-        padding: 50px 5%;
-    }
-
-    .products h2 {
-        font-size: 32px;
-    }
-
-    .card {
-        width: 100%;
-        max-width: 330px;
-    }
-
-    .about {
-        padding: 60px 8%;
-        text-align: center;
-    }
-
-    .about h2 {
-        font-size: 32px;
-    }
-
-    .about p {
-        font-size: 18px;
-    }
-
-    .about ul {
-        text-align: right;
-        width: fit-content;
-    }
-
-    footer {
-        padding: 45px 20px;
-        margin-top: 40px;
-    }
-
-    footer h3 {
-        font-size: 24px;
-        margin-bottom: 20px;
-    }
-
-    footer .footer-link {
-        margin: 0 7px;
-    }
-
-    footer .footer-link img {
-        width: 28px;
-        height: 28px;
-    }
-
-    footer p {
-        font-size: 13px;
-        margin-top: 22px;
-    }
-
-    .product-details {
-        flex-direction: column;
-        margin: 30px 15px;
-        padding: 20px;
-        gap: 30px;
-    }
-
-    .product-image img {
-        height: 300px;
-    }
-
-    .product-info {
-        width: 100%;
-    }
-
-    .product-page {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        margin: 30px auto;
-        padding: 20px;
-    }
-
-    .product-main-image {
-        height: 350px;
-    }
-
-    .product-info h1 {
-        font-size: 28px;
-    }
-
-    .option-title {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
-    /* =========================
-   ترتيب خانات الهدية
-========================= */
-
-#gift-details {
-    display: none;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #eee;
-}
-
-#gift-details.show {
-    display: block;
-}
-
-/* ترتيب الخانات في صفوف */
-
-.gift-form-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 18px;
-}
-
-/* الحقول التي تأخذ العرض كامل */
-
-.gift-form-full {
-    grid-column: 1 / -1;
-}
-
-/* رسالة الهدية */
-
-.gift-message-box {
-    background: #f2ead5;
-    color: #4c280c;
-    padding: 14px 16px;
-    border-radius: 10px;
-    margin-bottom: 20px;
-    line-height: 1.8;
-}
-
-/* الجوال */
-
-@media (max-width: 700px) {
-
-    .gift-form-grid {
-        grid-template-columns: 1fr;
-        gap: 0;
-    }
-
-    .gift-form-full {
-        grid-column: auto;
-    }
 /* =========================================
-   معرض صور المنتج
+   معرض صور المنتج والتكبير
 ========================================= */
-
-.product-image-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-}
-
-.product-main-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 15px;
-    cursor: pointer;
-    display: block;
-    background: #f2ead5;
-}
-
-/* الصور الصغيرة */
 
 .product-thumbnails {
     display: flex;
@@ -797,17 +560,10 @@ footer p::first-letter {
     background: #f2ead5;
 }
 
-.product-thumbnail:hover {
-    border-color: #4c280c;
-}
-
+.product-thumbnail:hover,
 .product-thumbnail.active {
     border-color: #4c280c;
 }
-
-/* =========================================
-   نافذة الصور الكبيرة
-========================================= */
 
 .image-modal {
     display: none;
@@ -856,20 +612,190 @@ footer p::first-letter {
     z-index: 10001;
 }
 
-.image-modal-prev {
-    left: 25px;
+.image-modal-prev { left: 25px; }
+.image-modal-next { right: 25px; }
+
+
+/* =================================
+   GIFT DETAILS
+================================= */
+
+#gift-details {
+    display: none;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
 }
 
-.image-modal-next {
-    right: 25px;
+#gift-details.show {
+    display: block;
 }
 
-@media (max-width: 700px) {
+.gift-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.gift-form-full {
+    grid-column: 1 / -1;
+}
+
+.gift-message-box {
+    background: #f2ead5;
+    color: #4c280c;
+    padding: 14px 16px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    line-height: 1.8;
+}
+
+
+/* =================================
+   MOBILE RESPONSIVE (الشاشات الصغيرة)
+================================= */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 12px 4%;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    /* إصلاح القائمة الرئيسية لتكون أفقيّة وبجانب بعض */
+    nav ul {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 12px;
+    }
+
+    nav ul li a {
+        font-size: 15px;
+    }
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 5%;
+    }
+
+    .text,
+    .image {
+        width: 100%;
+    }
+
+    .text h1 {
+        font-size: 32px;
+    }
+
+    .image img {
+        margin-top: 20px;
+    }
+
+    .products {
+        padding: 40px 3%;
+    }
+
+    .products h2 {
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+
+    /* إصلاح عرض المنتجات لتكون منتجين جنب بعض */
+    .cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .card {
+        width: 100%;
+        padding: 12px;
+        border-radius: 15px;
+    }
+
+    .card img {
+        height: 140px;
+        border-radius: 10px;
+        margin-bottom: 10px;
+    }
+
+    .card h3 {
+        font-size: 15px;
+        margin-bottom: 8px;
+    }
+
+    .card p {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .card button,
+    .product-details-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+        border-radius: 20px;
+        width: 100%;
+    }
+
+    .about {
+        padding: 50px 5%;
+        text-align: center;
+    }
+
+    .about h2 {
+        font-size: 26px;
+    }
+
+    .about p {
+        font-size: 16px;
+    }
+
+    footer {
+        padding: 35px 15px;
+        margin-top: 30px;
+    }
+
+    footer h3 {
+        font-size: 22px;
+    }
+
+    .product-details,
+    .product-page {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+        margin: 20px 10px;
+        padding: 15px;
+        gap: 25px;
+    }
+
+    .product-main-image,
+    .product-image img {
+        height: 280px;
+    }
+
+    .product-info h1 {
+        font-size: 24px;
+    }
+
+    .gift-form-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .gift-form-full {
+        grid-column: auto;
+    }
 
     .product-thumbnail {
-        width: 65px;
-        height: 65px;
-        min-width: 65px;
+        width: 60px;
+        height: 60px;
+        min-width: 60px;
     }
 
     .image-modal img {
@@ -884,18 +810,11 @@ footer p::first-letter {
     }
 
     .image-modal-arrow {
-        width: 40px;
-        height: 40px;
-        font-size: 20px;
+        width: 38px;
+        height: 38px;
+        font-size: 18px;
     }
 
-    .image-modal-prev {
-        left: 10px;
-    }
-
-    .image-modal-next {
-        right: 10px;
-    }
-}
-}
+    .image-modal-prev { left: 8px; }
+    .image-modal-next { right: 8px; }
 }
