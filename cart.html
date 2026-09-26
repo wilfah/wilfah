@@ -2,508 +2,168 @@
 <html lang="ar" dir="rtl">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>سلة التسوق | ولفة</title>
-
-    <!-- Font Awesome Icons -->
+    <title>ولفة | الصفحة الرئيسية</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
     <link rel="stylesheet" href="wilfah.css">
-
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
-
         * {
             box-sizing: border-box;
         }
 
         body {
             font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2ead5; /* خلفية البيج الدافي الأصلي للمتجر */
         }
 
-        .cart-page {
-            max-width: 1100px;
-            margin: 40px auto;
-            padding: 0 20px;
-        }
-
-        .cart-page > h1 {
-            color: #4c280c;
+        /* تنسيق القسم الترحيبي بالصورة */
+        .hero-section {
+            width: 100%;
+            margin-bottom: 25px;
             text-align: center;
-            margin-bottom: 35px;
         }
 
-        .cart-items {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .hero-img {
+            width: 100%;
+            max-width: 1100px;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            border-radius: 0 0 16px 16px;
+            box-shadow: 0 4px 15px rgba(76, 40, 12, 0.08);
         }
 
-        .cart-product {
-            background: #ffffff;
-            border: 1px solid #e5dccf;
-            border-radius: 15px;
-            padding: 18px;
-            display: flex;
-            align-items: center;
-            gap: 20px;
+        .hero-action {
+            margin-top: 15px;
         }
 
-        .cart-product-image {
-            width: 110px;
-            height: 110px;
-            object-fit: cover;
-            border-radius: 12px;
-            background: #f2ead5;
-        }
-
-        .cart-product-info {
-            flex: 1;
-        }
-
-        .cart-product-info h3 {
-            color: #4c280c;
-            margin: 0 0 8px;
-        }
-
-        .cart-product-info p {
-            margin: 4px 0;
-            color: #555;
-            font-size: 14px;
-        }
-
-        .cart-product-details {
-            margin-top: 8px;
-            padding-top: 8px;
-            border-top: 1px dashed #e5dccf;
-        }
-
-        .cart-product-details span {
+        .btn-shop-now {
             display: inline-block;
-            background: #faf8f4;
-            border: 1px solid #e5dccf;
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 12px;
-            margin-left: 5px;
-            margin-bottom: 5px;
+            background-color: #4c280c;
+            color: #ffffff;
+            padding: 10px 28px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .btn-shop-now:hover {
+            background-color: #351c08;
+            transform: translateY(-2px);
+        }
+
+        .products-section {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 0 15px;
+            text-align: center;
+        }
+
+        .products-section h2 {
             color: #4c280c;
+            font-size: 26px;
+            margin-bottom: 25px;
         }
 
-        .quantity-controls {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 12px;
-        }
-
-        .quantity-controls button {
-            width: 32px;
-            height: 32px;
-            border: none;
-            border-radius: 7px;
-            background: #4c280c;
-            color: white;
-            cursor: pointer;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
+        /* شبكة المنتجات لتعرض منتجين بجانب بعض */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             justify-content: center;
         }
 
-        .quantity-number {
-            min-width: 25px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .product-total {
-            font-weight: bold;
-            color: #4c280c !important;
-        }
-
-        .remove-button {
-            border: none;
-            background: #eee;
-            color: #8b0000;
-            padding: 8px 14px;
-            border-radius: 7px;
-            cursor: pointer;
-            font-family: inherit;
-            transition: 0.2s;
-        }
-
-        .remove-button:hover {
-            background: #ffd8d8;
-        }
-
-        .cart-card {
+        .product-card {
             background: #ffffff;
             border: 1px solid #e5dccf;
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 25px;
-        }
-
-        .cart-card h2 {
-            color: #4c280c;
-            margin-top: 0;
-            margin-bottom: 20px;
-        }
-
-        .form-group {
-            margin-bottom: 18px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 7px;
-            color: #4c280c;
-            font-weight: 600;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #d8cfc2;
-            border-radius: 9px;
-            background: #faf8f4;
-            font-family: inherit;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            border-color: #4c280c;
-        }
-
-        .form-group textarea {
-            resize: vertical;
-        }
-
-        .form-note {
-            display: block;
-            color: #777;
-            font-size: 12px;
-            margin-top: 6px;
-            line-height: 1.7;
-        }
-
-        .shipping-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .shipping-option {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            cursor: pointer;
-        }
-
-        .shipping-option:hover {
-            border-color: #4c280c;
-        }
-
-        .shipping-option-left {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .shipping-option input {
-            accent-color: #4c280c;
-        }
-
-        .shipping-price {
-            font-weight: bold;
-            color: #4c280c;
-        }
-
-        .gift-options {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .gift-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 14px;
-            cursor: pointer;
-        }
-
-        .gift-option input {
-            accent-color: #4c280c;
-        }
-
-        .gift-details {
-            display: none;
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-        }
-
-        .gift-details.show {
-            display: block;
-        }
-
-        .hide-price {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #4c280c;
-        }
-
-        .hide-price input {
-            accent-color: #4c280c;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .summary-row:last-child {
-            border-bottom: none;
-        }
-
-        .summary-total {
-            font-size: 20px;
-            font-weight: bold;
-            color: #4c280c;
-            margin-top: 10px;
-        }
-
-        .bank-payment {
-            background: #faf8f4;
-            border: 1px solid #d8cfc2;
-            border-radius: 10px;
-            padding: 18px;
-        }
-
-        .bank-info {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .bank-row {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .bank-label {
-            color: #4c280c;
-            font-weight: 600;
-        }
-
-        .bank-value {
-            color: #555;
-        }
-
-        .iban-box {
-            display: flex;
-            gap: 8px;
-        }
-
-        .iban-box input {
-            flex: 1;
-            width: 100%;
-            padding: 13px;
-            border: 1px solid #d8cfc2;
-            border-radius: 9px;
-            background: #ffffff;
-            font-family: inherit;
-            direction: ltr;
-            text-align: left;
-        }
-
-        .copy-iban-button {
-            border: none;
-            border-radius: 9px;
-            background: #4c280c;
-            color: white;
-            padding: 0 18px;
-            font-family: inherit;
-            cursor: pointer;
-        }
-
-        .transfer-note {
-            background: #f2ead5;
-            color: #4c280c;
-            border-radius: 9px;
-            padding: 13px;
-            margin-bottom: 18px;
-            line-height: 1.8;
-        }
-
-        .receipt-upload {
-            margin-top: 20px;
-        }
-
-        .receipt-upload > label {
-            display: block;
-            margin-bottom: 7px;
-            color: #4c280c;
-            font-weight: 600;
-        }
-
-        .required {
-            color: #8b0000;
-        }
-
-        .receipt-upload input[type="file"] {
-            width: 100%;
+            border-radius: 18px;
             padding: 12px;
-            border: 1px solid #d8cfc2;
-            border-radius: 9px;
-            background: #ffffff;
-            font-family: inherit;
-            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
         }
 
-        .receipt-preview {
-            display: none;
-            margin-top: 15px;
-            text-align: center;
-        }
-
-        .receipt-preview.show {
+        .product-card-link {
+            width: 100%;
             display: block;
         }
 
-        .receipt-preview img {
-            max-width: 100%;
-            max-height: 350px;
-            border-radius: 10px;
-            border: 1px solid #ddd;
-            object-fit: contain;
-        }
-
-        .receipt-file-name {
-            margin-top: 8px;
-            color: #777;
-            font-size: 12px;
-        }
-
-        .complete-order-button {
+        .product-card img {
             width: 100%;
-            margin-top: 20px;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background: #4c280c;
-            color: white;
-            font-family: inherit;
-            font-size: 17px;
-            font-weight: bold;
-            cursor: pointer;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 14px;
+            background-color: #f2ead5;
         }
 
-        .complete-order-button:hover {
-            opacity: 0.9;
-        }
-
-        .complete-order-button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
-
-        .empty-cart {
-            text-align: center;
-            background: #ffffff;
-            border: 1px solid #e5dccf;
-            border-radius: 15px;
-            padding: 50px 20px;
-        }
-
-        .empty-cart h2 {
+        .product-card h3 {
             color: #4c280c;
+            margin: 10px 0 4px 0;
+            font-size: 16px;
         }
 
-        .empty-cart p {
+        .product-card .price {
             color: #777;
+            font-size: 13px;
+            margin-bottom: 12px;
+            font-weight: 600;
         }
 
-        .products-button {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 12px 25px;
-            border-radius: 8px;
-            background: #4c280c;
-            color: white;
+        .btn-view-product {
+            display: block;
+            width: 100%;
+            background-color: #4c280c;
+            color: #ffffff;
             text-decoration: none;
+            padding: 8px 0;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 13px;
+            text-align: center;
+            transition: background-color 0.2s;
         }
 
-        @media (max-width: 700px) {
-
-            .cart-page {
-                margin: 25px auto;
-                padding: 0 12px;
-            }
-
-            .cart-product {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .cart-product-image {
-                width: 100%;
-                height: 220px;
-            }
-
-            .remove-button {
-                width: 100%;
-                margin-top: 10px;
-            }
-
-            .shipping-option {
-                align-items: flex-start;
-            }
-
-            .iban-box {
-                flex-direction: column;
-            }
-
-            .copy-iban-button {
-                padding: 12px;
-            }
-
+        .btn-view-product:hover {
+            background-color: #351c08;
         }
 
+        @media (min-width: 768px) {
+            .products-grid {
+                gap: 25px;
+            }
+            .product-card {
+                padding: 18px;
+            }
+            .product-card img {
+                height: 240px;
+            }
+            .product-card h3 {
+                font-size: 20px;
+            }
+            .product-card .price {
+                font-size: 15px;
+            }
+            .btn-view-product {
+                padding: 10px 0;
+                font-size: 15px;
+            }
+        }
     </style>
-
 </head>
-
 
 <body>
 
-
 <header>
     <nav>
-        <!-- الجزء العلوي: اللوجو باليمين والسلة باليسار -->
         <div class="header-top">
             <div class="logo">
                 <a href="index.html">
@@ -516,1717 +176,82 @@
             </a>
         </div>
 
-        <!-- القائمة الرئيسية -->
         <ul>
             <li><a href="index.html">الرئيسية</a></li>
             <li><a href="products.html">المنتجات</a></li>
-            <li><a href="index.html#about">من نحن</a></li>
+            <li><a href="#about">من نحن</a></li>
             <li><a href="#contact">تواصل</a></li>
         </ul>
     </nav>
 </header>
 
-
-<main class="cart-page">
-
-
-    <h1>
-        سلة التسوق
-    </h1>
-
-
-    <div
-        class="cart-items"
-        id="cart-items">
-    </div>
-
-
-    <!-- بيانات العميل -->
-
-    <div class="cart-card">
-
-        <h2>
-            بيانات التوصيل
-        </h2>
-
-
-        <div class="form-group">
-
-            <label for="customer-name">
-                الاسم الكامل
-            </label>
-
-            <input
-                type="text"
-                id="customer-name"
-                placeholder="اكتب الاسم الكامل">
-
+<main>
+    <!-- القسم الترحيبي ببصمة هويتكم الجميله -->
+    <section class="hero-section">
+        <img src="hedar%20wilfah.jpg" alt="نحيك الدفء بخيوطنا" class="hero-img">
+        <div class="hero-action">
+            <a href="products.html" class="btn-shop-now">تسوقي الآن ✨</a>
         </div>
-
-
-        <div class="form-group">
-
-            <label for="customer-phone">
-                رقم الجوال
-            </label>
-
-            <input
-                type="tel"
-                id="customer-phone"
-                placeholder="05xxxxxxxx">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="customer-city">
-                المدينة
-            </label>
-
-            <input
-                type="text"
-                id="customer-city"
-                placeholder="مثال: الرياض">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="customer-district">
-                الحي
-            </label>
-
-            <input
-                type="text"
-                id="customer-district"
-                placeholder="اكتب اسم الحي">
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="customer-address">
-                العنوان الوطني المختصر
-            </label>
-
-            <textarea
-                id="customer-address"
-                rows="3"
-                placeholder="العنوان الوطني المختصر"></textarea>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="order-notes">
-                ملاحظات الطلب
-            </label>
-
-            <textarea
-                id="order-notes"
-                rows="3"
-                placeholder="أي ملاحظات خاصة بالطلب"></textarea>
-
-        </div>
-
-    </div>
-
-
-    <!-- الشحن -->
-
-    <div class="cart-card">
-
-        <h2>
-            شركة الشحن
-        </h2>
-
-
-        <div class="shipping-options">
-
-            <label class="shipping-option">
-
-                <div class="shipping-option-left">
-
-                    <input
-                        type="radio"
-                        name="shipping"
-                        value="سمسا"
-                        data-price="25"
-                        checked>
-
-                    <span>
-                        سمسا
-                    </span>
-
-                </div>
-
-
-                <span class="shipping-price">
-                    25 ر.س
-                </span>
-
-            </label>
-
-        </div>
-
-    </div>
-
-
-    <!-- الهدية -->
-
-    <div class="cart-card">
-
-        <h2>
-            هل الطلب هدية؟
-        </h2>
-
-
-        <div class="gift-options">
-
-            <label class="gift-option">
-
-                <input
-                    type="radio"
-                    name="isGift"
-                    value="no"
-                    checked>
-
-                <span>
-                    لا، الطلب لي
-                </span>
-
-            </label>
-
-
-            <label class="gift-option">
-
-                <input
-                    type="radio"
-                    name="isGift"
-                    value="yes">
-
-                <span>
-                    نعم، أريد إرسالها كهدية 🎁
-                </span>
-
-            </label>
-
-        </div>
-
-
-        <div
-            id="gift-details"
-            class="gift-details">
-
-
-            <div class="form-group">
-
-                <label for="recipient-name">
-                    اسم المستلم
-                </label>
-
-                <input
-                    type="text"
-                    id="recipient-name"
-                    placeholder="اسم الشخص الذي تريد إهداءه">
-
+    </section>
+
+    <!-- قسم الأكثر مبيعاً -->
+    <section class="products-section">
+        <h2>الأكثر مبيعاً 🔥</h2>
+
+        <div class="products-grid">
+            
+            <!-- المنتج الأول: بطانية بوفي -->
+            <div class="product-card">
+                <a href="product-details.html?id=blanket" class="product-card-link">
+                    <img src="blanket.jpg" alt="بطانية بوفي" onerror="this.src='wilfah%20logo.jpg'">
+                </a>
+                <h3>بطانية بوفي</h3>
+                <p class="price">تبدأ من 150 ر.س</p>
+                <a href="product-details.html?id=blanket" class="btn-view-product">عرض المنتج</a>
             </div>
 
-
-            <div class="form-group">
-
-                <label for="recipient-phone">
-                    رقم جوال المستلم
-                </label>
-
-                <input
-                    type="tel"
-                    id="recipient-phone"
-                    placeholder="05xxxxxxxx">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="recipient-city">
-                    مدينة المستلم
-                </label>
-
-                <input
-                    type="text"
-                    id="recipient-city"
-                    placeholder="مدينة المستلم">
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="recipient-address">
-                    عنوان المستلم
-                </label>
-
-                <textarea
-                    id="recipient-address"
-                    rows="3"
-                    placeholder="عنوان المستلم"></textarea>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="gift-message">
-                    رسالة الهدية
-                </label>
-
-                <textarea
-                    id="gift-message"
-                    rows="3"
-                    placeholder="اكتب رسالة الهدية"></textarea>
-
-            </div>
-
-
-            <label class="hide-price">
-
-                <input
-                    type="checkbox"
-                    id="hide-price">
-
-                <span>
-                    إخفاء السعر عن مستلم الهدية
-                </span>
-
-            </label>
-
-        </div>
-
-    </div>
-
-
-    <!-- الدفع -->
-
-    <div class="cart-card">
-
-        <h2>
-            طريقة الدفع
-        </h2>
-
-
-        <div class="bank-payment">
-
-
-            <div class="transfer-note">
-
-                <strong>
-                    التحويل البنكي
-                </strong>
-
-                <br>
-
-                حوّل قيمة الطلب إلى الحساب البنكي الموضح أدناه،
-                ثم ارفع صورة إيصال التحويل لإتمام الطلب.
-
-            </div>
-
-
-            <div class="bank-info">
-
-
-                <div class="bank-row">
-
-                    <span class="bank-label">
-                        اسم البنك:
-                    </span>
-
-                    <span class="bank-value">
-                        البنك العربي الوطني
-                    </span>
-
-                </div>
-
-
-                <div class="bank-row">
-
-                    <span class="bank-label">
-                        اسم صاحب الحساب:
-                    </span>
-
-                    <span class="bank-value">
-                        عبير
-                    </span>
-
-                </div>
-
-
-                <div class="bank-row">
-
-                    <span class="bank-label">
-                        رقم الآيبان IBAN
-                    </span>
-
-
-                    <div class="iban-box">
-
-                        <input
-                            type="text"
-                            id="iban-number"
-                            value="SA7830100991109791676794"
-                            readonly>
-
-
-                        <button
-                            type="button"
-                            class="copy-iban-button"
-                            onclick="copyIBAN()">
-
-                            نسخ الآيبان
-
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="receipt-upload">
-
-                <label for="receipt">
-
-                    إيصال التحويل
-
-                    <span class="required">
-                        *
-                    </span>
-
-                </label>
-
-
-                <input
-                    type="file"
-                    id="receipt"
-                    accept="image/*,application/pdf,.pdf">
-
-                <small class="form-note">
-
-                    صورة إيصال التحويل مطلوبة لإتمام الطلب.
-
-                </small>
-
-
-                <div
-                    id="receipt-preview"
-                    class="receipt-preview">
-
-                    <img
-                        id="receipt-image"
-                        src=""
-                        alt="معاينة إيصال التحويل">
-
-
-                    <div
-                        id="receipt-file-name"
-                        class="receipt-file-name">
-                    </div>
-
-                </div>
-
+            <!-- المنتج الثاني: شال بوفي -->
+            <div class="product-card">
+                <a href="product-details.html?id=shawl" class="product-card-link">
+                    <img src="shawl.jpg" alt="شال بوفي" onerror="this.src='wilfah%20logo.jpg'">
+                </a>
+                <h3>شال بوفي</h3>
+                <p class="price">تبدأ من 80 ر.س</p>
+                <a href="product-details.html?id=shawl" class="btn-view-product">عرض المنتج</a>
             </div>
 
         </div>
+    </section>
 
-    </div>
-
-
-    <!-- الملخص -->
-
-    <div class="cart-card">
-
-        <h2>
-            ملخص الطلب
-        </h2>
-
-
-        <div class="summary-row">
-
-            <span>
-                مجموع المنتجات
-            </span>
-
-            <span id="cart-total">
-                0 ر.س
-            </span>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <span>
-                شركة الشحن
-            </span>
-
-            <span id="shipping-company">
-                سمسا
-            </span>
-
-        </div>
-
-
-        <div class="summary-row">
-
-            <span>
-                رسوم التوصيل
-            </span>
-
-            <span id="shipping">
-                25 ر.س
-            </span>
-
-        </div>
-
-
-        <div class="summary-row summary-total">
-
-            <span>
-                الإجمالي النهائي
-            </span>
-
-            <span id="grand-total">
-                0 ر.س
-            </span>
-
-        </div>
-
-
-        <button
-            class="complete-order-button"
-            id="complete-order-button"
-            type="button"
-            onclick="completeOrder()">
-
-            إتمام الطلب
-
-        </button>
-
-    </div>
-
+    <!-- قسم من نحن -->
+    <section id="about" class="products-section" style="text-align: right; max-width: 800px; margin-top: 50px;">
+        <h2>من نحن</h2>
+        <ul style="line-height: 1.9; color: #4c280c; font-size: 15px;">
+            <li>نؤمن في ولفة أن الدفء قطعة تُحاك بكل حب.</li>
+            <li>حياكة يدوية 100% بأجود خامات الصوف.</li>
+            <li>تصفح مجموعتنا أو تواصل معنا لصنع قطعتك الخاصة.</li>
+        </ul>
+    </section>
 </main>
 
-
 <footer id="contact">
-
-    <h3>
-        تواصل معنا
-    </h3>
-
-    <!-- أيقونة تويتر/X باستخدام SVG مضمون الظهور -->
+    <h3>تواصل معنا</h3>
     <a href="https://x.com/Wilfahsa" class="footer-link" target="_blank" aria-label="X Twitter">
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
         </svg>
     </a>
-
-
-    <a
-        href="https://wa.me/966561565969"
-        class="footer-link"
-        target="_blank">
-
-        <img
-            src="whatsapp.PNG"
-            alt="WhatsApp">
-
+    <a href="https://wa.me/966561565969" class="footer-link" target="_blank">
+        <img src="whatsapp.PNG" alt="WhatsApp">
     </a>
-
-
-    <a
-        href="https://www.instagram.com/wilfahsa"
-        class="footer-link"
-        target="_blank">
-
-        <img
-            src="insta.PNG"
-            alt="Instagram">
-
+    <a href="https://www.instagram.com/wilfahsa" class="footer-link" target="_blank">
+        <img src="insta.PNG" alt="Instagram">
     </a>
-    
-    <a
-        href="https://www.tiktok.com/@wilfah.sa?_r=1&_t=ZS-99pu411m3y3"
-        class="footer-link"
-        target="_blank">
-
-        <img
-            src="tiktok.PNG"
-            alt="tiktok">
-
+    <a href="https://www.tiktok.com/@wilfah.sa?_r=1&_t=ZS-99pu411m3y3" class="footer-link" target="_blank">
+        <img src="tiktok.PNG" alt="tiktok">
     </a>
-    <p>
-        ©️ 2026 متجر ولفة - جميع الحقوق محفوظة
-    </p>
-
+    <p>©️ 2026 متجر ولفة - جميع الحقوق محفوظة</p>
 </footer>
 
-
-<!-- =========================
-     SUPABASE
-========================= -->
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-<script>
-
-const SUPABASE_URL =
-    "https://oahdectkcpwgqnibdrlj.supabase.co";
-
-
-const SUPABASE_KEY =
-    "sb_publishable_dDGoKbjWS15P5dnwO-UPdg_HZCa0QWv";
-
-
-const supabaseClient =
-    supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
-    );
-
-
-/* =========================
-   عرض السلة
-========================= */
-
-function displayCart() {
-
-    let cart =
-        JSON.parse(
-            localStorage.getItem("cart")
-        ) || [];
-
-
-    let cartItems =
-        document.getElementById("cart-items");
-
-
-    let cartTotal =
-        document.getElementById("cart-total");
-
-
-    let shipping =
-        document.getElementById("shipping");
-
-
-    let grandTotal =
-        document.getElementById("grand-total");
-
-
-    cartItems.innerHTML = "";
-
-
-    let total = 0;
-
-
-    if (cart.length === 0) {
-
-        cartItems.innerHTML = `
-
-            <div class="empty-cart">
-
-                <h2>
-                    سلتك فارغة 🛍️
-                </h2>
-
-                <p>
-                    لم تتم إضافة أي منتجات حتى الآن.
-                </p>
-
-                <a
-                    href="products.html"
-                    class="products-button">
-
-                    تصفح المنتجات
-
-                </a>
-
-            </div>
-
-        `;
-
-
-        cartTotal.textContent =
-            "0 ر.س";
-
-
-        shipping.textContent =
-            "0 ر.س";
-
-
-        grandTotal.textContent =
-            "0 ر.س";
-
-
-        return;
-    }
-
-
-    cart.forEach(
-        function(product, index) {
-
-            let productTotal =
-                Number(product.price) *
-                Number(product.quantity);
-
-
-            total += productTotal;
-
-
-            let imageHTML =
-                product.image
-
-                    ? `<img
-                        class="cart-product-image"
-                        src="${product.image}"
-                        alt="${product.name}">`
-
-                    : `<div
-                        class="cart-product-image">
-                      </div>`;
-
-            // تجهيز تفاصيل الخيارات المخصصة للمنتج
-            let detailsHTML = '';
-
-            if (product.color) detailsHTML += `<span>اللون: ${product.color}</span>`;
-            if (product.color1 && product.color2 && product.color3) {
-                detailsHTML += `<span>الألوان: ${product.color1} / ${product.color2} / ${product.color3}</span>`;
-            }
-            if (product.size) detailsHTML += `<span>المقاس: ${product.size}</span>`;
-            if (product.stars > 0) detailsHTML += `<span>نجوم: ${product.stars} (لون: ${product.starsColor})</span>`;
-            if (product.hearts > 0) detailsHTML += `<span>قلوب: ${product.hearts} (لون: ${product.heartsColor})</span>`;
-            if (product.letters > 0) detailsHTML += `<span>أحرف: ${product.customLetters} (لون: ${product.lettersColor})</span>`;
-            if (product.giftNote) detailsHTML += `<span>رسالة الإهداء: ${product.giftNote}</span>`;
-
-
-            cartItems.innerHTML += `
-
-                <div class="cart-product">
-
-                    ${imageHTML}
-
-
-                    <div class="cart-product-info">
-
-                        <h3>
-                            ${product.name}
-                        </h3>
-
-
-                        <p>
-                            السعر الفردي:
-                            ${product.price}
-                            ر.س
-                        </p>
-
-                        ${detailsHTML ? `<div class="cart-product-details">${detailsHTML}</div>` : ''}
-
-                        <p class="product-total">
-
-                            إجمالي المنتج:
-                            ${productTotal}
-                            ر.س
-
-                        </p>
-
-
-                        <div class="quantity-controls">
-
-                            <button
-                                type="button"
-                                onclick="changeQuantity(${index}, 1)">
-
-                                +
-
-                            </button>
-
-
-                            <span class="quantity-number">
-
-                                ${product.quantity}
-
-                            </span>
-
-
-                            <button
-                                type="button"
-                                onclick="changeQuantity(${index}, -1)">
-
-                                −
-
-                            </button>
-
-                        </div>
-
-                    </div>
-
-
-                    <button
-                        type="button"
-                        class="remove-button"
-                        onclick="removeFromCart(${index})">
-
-                        حذف
-
-                    </button>
-
-                </div>
-
-            `;
-
-        }
-    );
-
-
-    updateTotals(total);
-
-}
-
-
-/* =========================
-   تغيير الكمية
-========================= */
-
-function changeQuantity(index, amount) {
-
-    let cart =
-        JSON.parse(
-            localStorage.getItem("cart")
-        ) || [];
-
-    let newQuantity = Number(cart[index].quantity) + amount;
-
-    if (newQuantity <= 0) {
-        if (confirm("هل ترغب في حذف هذا المنتج من السلة؟")) {
-            cart.splice(index, 1);
-        } else {
-            return;
-        }
-    } else {
-        cart[index].quantity = newQuantity;
-    }
-
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-
-    displayCart();
-
-}
-
-
-/* =========================
-   حذف المنتج
-========================= */
-
-function removeFromCart(index) {
-
-    let cart =
-        JSON.parse(
-            localStorage.getItem("cart")
-        ) || [];
-
-
-    cart.splice(index, 1);
-
-
-    localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
-    );
-
-
-    displayCart();
-
-}
-
-
-/* =========================
-   تحديث الأسعار
-========================= */
-
-function updateTotals(total) {
-
-    let selectedShipping =
-        document.querySelector(
-            'input[name="shipping"]:checked'
-        );
-
-
-    let shippingCost =
-        selectedShipping
-            ? Number(
-                selectedShipping.dataset.price
-            )
-            : 0;
-
-
-    let shippingCompany =
-        selectedShipping
-            ? selectedShipping.value
-            : "-";
-
-
-    let finalTotal =
-        total +
-        shippingCost;
-
-
-    document.getElementById(
-        "cart-total"
-    ).textContent =
-        total + " ر.س";
-
-
-    document.getElementById(
-        "shipping"
-    ).textContent =
-        shippingCost + " ر.س";
-
-
-    document.getElementById(
-        "shipping-company"
-    ).textContent =
-        shippingCompany;
-
-
-    document.getElementById(
-        "grand-total"
-    ).textContent =
-        finalTotal + " ر.س";
-
-}
-
-
-/* =========================
-   تغيير الشحن
-========================= */
-
-document.querySelectorAll(
-    'input[name="shipping"]'
-).forEach(
-    function(option) {
-
-        option.addEventListener(
-            "change",
-            function() {
-
-                let cart =
-                    JSON.parse(
-                        localStorage.getItem("cart")
-                    ) || [];
-
-
-                let total = 0;
-
-
-                cart.forEach(
-                    function(product) {
-
-                        total +=
-                            Number(product.price) *
-                            Number(product.quantity);
-
-                    }
-                );
-
-
-                updateTotals(total);
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================
-   الهدية
-========================= */
-
-document.querySelectorAll(
-    'input[name="isGift"]'
-).forEach(
-    function(option) {
-
-        option.addEventListener(
-            "change",
-            function() {
-
-                let giftDetails =
-                    document.getElementById(
-                        "gift-details"
-                    );
-
-
-                if (
-                    this.value === "yes"
-                ) {
-
-                    giftDetails.classList.add(
-                        "show"
-                    );
-
-                } else {
-
-                    giftDetails.classList.remove(
-                        "show"
-                    );
-
-                }
-
-            }
-        );
-
-    }
-);
-
-
-/* =========================
-   نسخ الآيبان
-========================= */
-
-function copyIBAN() {
-
-    let iban =
-        document.getElementById(
-            "iban-number"
-        );
-
-
-    navigator.clipboard.writeText(
-        iban.value
-    )
-
-    .then(
-        function() {
-
-            alert(
-                "تم نسخ الآيبان بنجاح ✅"
-            );
-
-        }
-    )
-
-    .catch(
-        function() {
-
-            iban.removeAttribute(
-                "readonly"
-            );
-
-            iban.select();
-
-            document.execCommand(
-                "copy"
-            );
-
-            iban.setAttribute(
-                "readonly",
-                true
-            );
-
-            alert(
-                "تم نسخ الآيبان بنجاح ✅"
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================
-   معاينة الإيصال
-========================= */
-
-document.getElementById(
-    "receipt"
-).addEventListener(
-    "change",
-    function() {
-
-        let file =
-            this.files[0];
-
-
-        let preview =
-            document.getElementById(
-                "receipt-preview"
-            );
-
-
-        let image =
-            document.getElementById(
-                "receipt-image"
-            );
-
-
-        let fileName =
-            document.getElementById(
-                "receipt-file-name"
-            );
-
-
-        if (!file) {
-
-            preview.classList.remove(
-                "show"
-            );
-
-            image.src = "";
-
-            fileName.textContent = "";
-
-            return;
-        }
-
-
-        let allowedTypes = [
-
-            "image/jpeg",
-
-            "image/png",
-
-            "image/webp"
-
-        ];
-
-
-        if (
-            !allowedTypes.includes(
-                file.type
-            )
-        ) {
-
-            alert(
-                "يرجى رفع صورة JPG أو PNG أو WEBP."
-            );
-
-
-            this.value = "";
-
-            return;
-        }
-
-
-        let maxSize =
-            5 * 1024 * 1024;
-
-
-        if (
-            file.size > maxSize
-        ) {
-
-            alert(
-                "حجم الصورة يجب ألا يتجاوز 5 ميجابايت."
-            );
-
-
-            this.value = "";
-
-            return;
-        }
-
-
-        let reader =
-            new FileReader();
-
-
-        reader.onload =
-            function(event) {
-
-                image.src =
-                    event.target.result;
-
-
-                fileName.textContent =
-                    "الملف: " +
-                    file.name;
-
-
-                preview.classList.add(
-                    "show"
-                );
-
-            };
-
-
-        reader.readAsDataURL(
-            file
-        );
-
-    }
-);
-
-
-/* =========================
-   إنشاء رقم الطلب
-========================= */
-
-function generateOrderNumber() {
-
-    let now =
-        new Date();
-
-
-    let year =
-        now.getFullYear();
-
-
-    let random =
-        Math.floor(
-            1000 +
-            Math.random() * 9000
-        );
-
-
-    return "WLF-" +
-        year +
-        "-" +
-        random;
-
-}
-
-
-/* =========================
-   إتمام الطلب
-========================= */
-
-async function completeOrder() {
-
-    let cart =
-        JSON.parse(
-            localStorage.getItem("cart")
-        ) || [];
-
-
-    if (
-        cart.length === 0
-    ) {
-
-        alert(
-            "السلة فارغة، أضف منتجًا أولًا."
-        );
-
-        return;
-    }
-
-
-    /* =========================
-       بيانات العميل
-    ========================= */
-
-    let name =
-        document.getElementById(
-            "customer-name"
-        ).value.trim();
-
-
-    let phone =
-        document.getElementById(
-            "customer-phone"
-        ).value.trim();
-
-
-    let city =
-        document.getElementById(
-            "customer-city"
-        ).value.trim();
-
-
-    let district =
-        document.getElementById(
-            "customer-district"
-        ).value.trim();
-
-
-    let address =
-        document.getElementById(
-            "customer-address"
-        ).value.trim();
-
-
-    let orderNotes =
-        document.getElementById(
-            "order-notes"
-        ).value.trim();
-
-
-    if (
-        name === "" ||
-        phone === "" ||
-        city === "" ||
-        district === "" ||
-        address === ""
-    ) {
-
-        alert(
-            "فضلاً أدخل جميع بيانات التوصيل."
-        );
-
-        return;
-    }
-
-
-    /* =========================
-       الشحن
-    ========================= */
-
-    let shipping =
-        document.querySelector(
-            'input[name="shipping"]:checked'
-        );
-
-
-    if (!shipping) {
-
-        alert(
-            "فضلاً اختر شركة الشحن."
-        );
-
-        return;
-    }
-
-
-    /* =========================
-       الإيصال
-    ========================= */
-
-    let receipt =
-        document.getElementById(
-            "receipt"
-        );
-
-
-    if (
-        !receipt.files ||
-        receipt.files.length === 0
-    ) {
-
-        alert(
-            "فضلاً ارفع صورة إيصال التحويل."
-        );
-
-        receipt.focus();
-
-        return;
-    }
-
-
-    let receiptFile =
-        receipt.files[0];
-
-
-    /* =========================
-       الهدية
-    ========================= */
-
-    let selectedGift =
-        document.querySelector(
-            'input[name="isGift"]:checked'
-        );
-
-
-    let isGift =
-        selectedGift
-            ? selectedGift.value === "yes"
-            : false;
-
-
-    let recipientName = "";
-
-    let recipientPhone = "";
-
-    let recipientCity = "";
-
-    let recipientAddress = "";
-
-    let giftMessage = "";
-
-    let hidePrice = false;
-
-
-    if (isGift) {
-
-        recipientName =
-            document.getElementById(
-                "recipient-name"
-            ).value.trim();
-
-
-        recipientPhone =
-            document.getElementById(
-                "recipient-phone"
-            ).value.trim();
-
-
-        recipientCity =
-            document.getElementById(
-                "recipient-city"
-            ).value.trim();
-
-
-        recipientAddress =
-            document.getElementById(
-                "recipient-address"
-            ).value.trim();
-
-
-        giftMessage =
-            document.getElementById(
-                "gift-message"
-            ).value.trim();
-
-
-        hidePrice =
-            document.getElementById(
-                "hide-price"
-            ).checked;
-
-
-        if (
-            recipientName === "" ||
-            recipientPhone === "" ||
-            recipientCity === "" ||
-            recipientAddress === ""
-        ) {
-
-            alert(
-                "فضلاً أدخل جميع بيانات مستلم الهدية."
-            );
-
-            return;
-        }
-
-    }
-
-
-    /* =========================
-       حساب السعر
-    ========================= */
-
-    let productsTotal = 0;
-
-
-    cart.forEach(
-        function(product) {
-
-            productsTotal +=
-                Number(product.price) *
-                Number(product.quantity);
-
-        }
-    );
-
-
-    let shippingCost =
-        Number(
-            shipping.dataset.price
-        );
-
-
-    let finalTotal =
-        productsTotal +
-        shippingCost;
-
-
-    /* =========================
-       زر الإرسال
-    ========================= */
-
-    let button =
-        document.getElementById(
-            "complete-order-button"
-        );
-
-
-    button.disabled = true;
-
-    button.textContent =
-        "جاري إرسال الطلب...";
-
-
-    try {
-
-        /* =========================
-           رقم الطلب
-        ========================= */
-
-        let orderNumber =
-            generateOrderNumber();
-
-
-        /* =========================
-           اسم ملف الإيصال
-        ========================= */
-
-        let fileExtension =
-            receiptFile.name
-                .split(".")
-                .pop()
-                .toLowerCase();
-
-
-        let filePath =
-            orderNumber +
-            "-" +
-            Date.now() +
-            "." +
-            fileExtension;
-
-
-        /* =========================
-           رفع الإيصال
-        ========================= */
-
-        const {
-            error: uploadError
-        } =
-            await supabaseClient
-                .storage
-                .from("payment-proofs")
-                .upload(
-                    filePath,
-                    receiptFile,
-                    {
-                        cacheControl: "3600",
-                        upsert: false
-                    }
-                );
-
-
-        if (uploadError) {
-
-            console.error(
-                uploadError
-            );
-
-            throw new Error(
-                "تعذر رفع إيصال التحويل."
-            );
-
-        }
-
-
-        /* =========================
-           بيانات الطلب
-        ========================= */
-
-        let productsData = {
-
-            items: cart,
-
-            customer: {
-
-                name: name,
-
-                phone: phone,
-
-                city: city,
-
-                district: district,
-
-                address: address,
-
-                notes: orderNotes
-
-            },
-
-            shipping: {
-
-                company:
-                    shipping.value,
-
-                price:
-                    shippingCost
-
-            },
-
-            gift: {
-
-                isGift:
-                    isGift,
-
-                recipientName:
-                    recipientName,
-
-                recipientPhone:
-                    recipientPhone,
-
-                recipientCity:
-                    recipientCity,
-
-                recipientAddress:
-                    recipientAddress,
-
-                message:
-                    giftMessage,
-
-                hidePrice:
-                    hidePrice
-
-            },
-
-            payment: {
-
-                method:
-                    "تحويل بنكي",
-
-                status:
-                    "بانتظار التحقق من التحويل"
-
-            }
-
-        };
-
-
-        /* =========================
-           حفظ الطلب
-        ========================= */
-
-        const {
-            data: insertedOrder,
-            error: orderError
-        } =
-            await supabaseClient
-                .from("orders")
-                .insert({
-
-                    order_number:
-                        orderNumber,
-
-                    customer_name:
-                        name,
-
-                    phone:
-                        phone,
-
-                    address:
-                        JSON.stringify({
-                            city: city,
-                            district: district,
-                            address: address,
-                            notes: orderNotes
-                        }),
-
-                    products:
-                        productsData,
-
-                    total:
-                        finalTotal,
-
-                    payment_proof:
-                        filePath,
-
-                    status:
-                        "بانتظار التحقق من التحويل"
-
-                })
-
-                .select()
-                .single();
-
-
-        if (orderError) {
-
-            console.error("ORDER ERROR:", orderError);
-
-            alert(
-                "خطأ Supabase:\n\n" +
-                JSON.stringify(orderError, null, 2)
-            );
-
-            throw new Error(
-                "تعذر حفظ الطلب."
-            );
-        }
-
-
-        /* =========================
-           نجاح الطلب
-        ========================= */
-
-        localStorage.removeItem(
-            "cart"
-        );
-
-
-        localStorage.setItem(
-            "lastOrderNumber",
-            orderNumber
-        );
-
-
-        localStorage.setItem(
-            "lastOrderId",
-            insertedOrder.id
-        );
-
-
-        alert(
-            "تم إرسال طلبك بنجاح 🎉\n\n" +
-            "رقم الطلب: " +
-            orderNumber +
-            "\n\n" +
-            "سيتم التحقق من التحويل والتواصل معك."
-        );
-
-
-        window.location.reload();
-
-
-    } catch (error) {
-
-        console.error(
-            "Order Error:",
-            error
-        );
-
-
-        alert(
-            error.message ||
-            "حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى."
-        );
-
-
-        button.disabled = false;
-
-        button.textContent =
-            "إتمام الطلب";
-
-    }
-
-}
-
-
-/* =========================
-   تشغيل الصفحة
-========================= */
-
-displayCart();
-
-</script>
-
-
 </body>
-
 </html>
