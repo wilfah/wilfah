@@ -81,16 +81,22 @@
             justify-content: center;
         }
 
-        /* تعديل خلفية بطاقة المنتج إلى اللون البيج */
+        /* تعديل بطاقة المنتج بظل واضح ولون خلفية متباين */
         .product-card {
-            background-color: #f2ead5;
-            border: 1px solid #e5dccf;
+            background-color: #fbf7ee;
+            border: 1px solid #e0d5c3;
             border-radius: 18px;
             padding: 12px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+            box-shadow: 0 10px 25px rgba(76, 40, 12, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 32px rgba(76, 40, 12, 0.22);
         }
 
         .product-card-link {
@@ -187,7 +193,7 @@
 </header>
 
 <main>
-    <!-- القسم الترحيبي ببصمة هويتكم الجميله -->
+    <!-- القسم الترحيبي -->
     <section class="hero-section">
         <img src="hedar%20wilfah.jpg" alt="نحيك الدفء بخيوطنا" class="hero-img">
         <div class="hero-action">
