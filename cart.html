@@ -783,10 +783,6 @@
                     type="checkbox"
                     id="hide-price">
 
-                <span>
-                    إخفاء السعر عن مستلم الهدية
-                </span>
-
             </label>
 
         </div>
@@ -991,15 +987,15 @@ accept="image/*,application/pdf,.pdf"
         </div>
 
 
-        <button
-            class="complete-order-button"
-            id="complete-order-button"
-            type="button"
-            onclick="completeOrder()">
-
-            إتمام الطلب
-
-        </button>
+        <form action="https://formspree.io/f/mdeawdbg" method="POST">
+    <!-- هنا حطيت لك الزر عشان يرسل الطلب مباشرة لإيميلك -->
+    <button
+        class="complete-order-button"
+        id="complete-order-button"
+        type="submit">
+        إتمام الطلب
+    </button>
+</form>
 
     </div>
 
