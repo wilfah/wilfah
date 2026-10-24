@@ -1481,7 +1481,96 @@ function copyIBAN() {
 
 
 /* =========================
-   معاينة الإيصال
+   معاينة الإ/* =========================
+   معاينة الإيصال (محدث ليدعم الصور و PDF)
+========================= */
+document.getElementById(
+    "receipt"
+).addEventListener(
+    "change",
+    function() {
+        let file =
+            this.files[0];
+        let preview =
+            document.getElementById(
+                "receipt-preview"
+            );
+        let image =
+            document.getElementById(
+                "receipt-image"
+            );
+        let fileName =
+            document.getElementById(
+                "receipt-file-name"
+            );
+        if (!file) {
+            preview.classList.remove(
+                "show"
+            );
+            image.src = "";
+            fileName.textContent = "";
+            return;
+        }
+        // أضفنا "image/jpg" و "application/pdf" مع الأنواع المسموحة
+        let allowedTypes = [
+            "image/jpeg",
+            
+            "image/jpg",
+            "image/png",
+            "image/webp",
+            
+            "application/pdf"
+        ];
+        if (
+            !allowedTypes.includes(
+                file.type
+            )
+        ) {
+            alert(
+                "يرجى رفع صورة JPG, PNG, WEBP أو ملف PDF."
+            );
+            this.value = "";
+            preview.classList.remove(
+                "show"
+            );
+            return;
+        }
+        let maxSize =
+            5 * 1024 * 1024;
+        if (
+            file.size > maxSize
+        ) {
+            alert(
+                "حجم الملف يجب ألا يتجاوز 5 ميجابايت."
+            );
+            this.value = "";
+            preview.classList.remove(
+                "show"
+            );
+            return;
+        }
+        let reader =
+            new FileReader();
+        reader.onload =
+            function(event) {
+                // إذا كان الملف صورة، اعرضها في المعاينة
+                if (file.type.startsWith("image/")) {
+                    image.src = event.target.result;
+                    image.style.display = "block";
+                } else {
+                    // إذا كان PDF، أخفِ عنصر الصورة واعرض اسم الملف فقط
+                    image.src = "";
+                    image.style.display = "none";
+                }
+                fileName.textContent =
+                    "الملف: " +
+                    file.name;
+                preview.classList.add(
+                    "show"
+                );
+            };
+        reader.readAsDataURL(
+            fileيصال
 ========================= */
 
 document.getElementById(
