@@ -988,13 +988,8 @@ accept="image/*,application/pdf,.pdf"
 
 
         <form action="https://formspree.io/f/mdeawdbg" method="POST">
-    <!-- هنا حطيت لك الزر عشان يرسل الطلب مباشرة لإيميلك -->
-    <button
-        class="complete-order-button"
-        id="complete-order-button"
-        type="submit">
-        إتمام الطلب
-    </button>
+    <input type="hidden" name="_next" value="https://formspree.io/thanks">
+    <button class="complete-order-button" type="submit">إتمام الطلب</button>
 </form>
 
     </div>
