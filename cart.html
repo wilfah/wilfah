@@ -2239,7 +2239,58 @@ window.location.reload();
 ========================= */
 
 displayCart();
-
+<!-- كود الجافا سكريبت في نهاية ملف cart.html -->
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const receiptInput = document.getElementById("receipt");
+        if (!receiptInput) return;
+        receiptInput.addEventListener("change", function () {
+            let file = this.files[0];
+            let preview = document.getElementById("receipt-preview");
+            let image = document.getElementById("receipt-image");
+            let fileName = document.getElementById("receipt-file-name");
+            if (!file) {
+                if (preview) preview.classList.remove("show");
+                if (image) image.src = "";
+                if (fileName) fileName.textContent = "";
+                return;
+            }
+            let allowedTypes = [
+                "image/jpeg",
+                "image/jpg",
+                "image/png",
+                "image/webp",
+                "application/pdf"
+            ];
+            if (!allowedTypes.includes(file.type)) {
+                alert("يرجى رفع ملف بصيغة صورة (JPG, PNG, WEBP) أو ملف PDF.");
+                this.value = "";
+                return;
+            }
+            let maxSize = 5 * 1024 * 1024;
+            if (file.size > maxSize) {
+                alert("حجم الملف يجب ألا يتجاوز 5 ميجابايت.");
+                this.value = "";
+                return;
+            }
+            if (file.type === "application/pdf") {
+                if (image) image.src = "";
+                if (fileName) fileName.textContent = "ملف PDF: " + file.name;
+                if (preview) preview.classList.add("show");
+            } else {
+                let reader = new FileReader();
+                reader.onload = function (event) {
+                    if (image) image.src = event.target.result;
+                    if (fileName) fileName.textContent = "الملف: " + file.name;
+                    if (preview) preview.classList.add("show");
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    });
+    </script>
+</body>
+</html>
 </script>
 
 
