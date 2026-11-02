@@ -1,18 +1,4 @@
-throw new Error("تعذر رفع إيصال التحويل.");
-        }
-        let productsData = {
-            items: cart,
-            customer: { name: name, phone: phone, city: city, district: district, address: address, notes: orderNotes },
-            shipping: { company: shipping.value, price: shippingCost },
-            gift: { isGift: isGift, recipientName: recipientName, recipientPhone: recipientPhone, recipientCity: recipientCity, recipientAddress: recipientAddress, message: giftMessage, hidePrice: hidePrice },
-            payment: { method: "تحويل بنكي", status: "بانتظار التحقق من التحويل" }
-        };
-        const { data: insertedOrder, error: orderError } = await supabaseClient
-            .from("orders")
-            .insert({
-                order_number: orderNumber,
-                customer_name: name,
-                phone: phone,
+phone: phone,
                 address: JSON.stringify({ city: city, district: district, address: address, notes: orderNotes }),
                 products: productsData,
                 total: finalTotal,
@@ -21,16 +7,20 @@ throw new Error("تعذر رفع إيصال التحويل.");
             })
             .select()
             .single();
+
         if (orderError) {
             console.error("ORDER ERROR:", orderError);
             alert("خطأ Supabase:\n\n" + JSON.stringify(orderError, null, 2));
             throw new Error("تعذر حفظ الطلب.");
         }
+
         localStorage.removeItem("cart");
         localStorage.setItem("lastOrderNumber", orderNumber);
         localStorage.setItem("lastOrderId", insertedOrder.id);
+
         alert("تم إرسال طلبك بنجاح 🎉\n\nرقم الطلب: " + orderNumber + "\n\nسيتم التحقق من التحويل والتواصل معك.");
         window.location.href = "thanks.html";
+
     } catch (error) {
         console.error("Order Error:", error);
         alert(error.message || "حدث خطأ أثناء إرسال الطلب. حاول مرة أخرى.");
@@ -38,10 +28,9 @@ throw new Error("تعذر رفع إيصال التحويل.");
         button.textContent = "إتمام الطلب";
     }
 }
-/* =========================
-   تشغيل الصفحة
-========================= */
+
 displayCart();
 </script>
+
 </body>
 </html>
