@@ -552,7 +552,28 @@ async function completeOrder() {
             console.error("ORDER ERROR:", orderError);
             alert("خطأ Supabase:\n\n" + JSON.stringify(orderError, null, 2));
             throw new Error("تعذر حفظ الطلب.");
-        }
+        } try {
+        let productsSummary = cart.map(p => `${p.name} (الكمية: ${p.quantity}, السعر: ${p.price} ر.س)`).join(" - ");
+        
+        let formData = new FormData();
+        formData.append("رقم الطلب", orderNumber);
+        formData.append("اسم العميل", name);
+        formData.append("رقم الجوال", phone);
+        formData.append("المدينة", city);
+        formData.append("الحي", district);
+        formData.append("العنوان", address);
+        formData.append("ملاحظات الطلب", orderNotes);
+        formData.append("المنتجات المطلوبة", productsSummary);
+        formData.append("الإجمالي النهائي", finalTotal + " ر.س");
+
+        await fetch("https://formspree.io/f/mdeawdbg", {
+            method: "POST",
+            body: formData,
+            headers: { 'Accept': 'application/json' }
+        });
+    } catch (mailErr) {
+        console.log("Formspree notice error:", mailErr);
+    }
 
         localStorage.removeItem("cart");
         localStorage.setItem("lastOrderNumber", orderNumber);
